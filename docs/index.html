@@ -1,9 +1,171 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Test Page</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hệ thống Mô phỏng Kiến trúc Máy tính</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <h1>✅ yes, GitHub Pages is working!</h1>
+    <header>
+        <img src="DNC.png" alt="Logo Đại học Nam Cần Thơ" style="width:300px;">
+    </header>
+
+    <header>
+        <h1>Mô phỏng Thực hành Kiến trúc Máy tính</h1>
+        <p class="intro">
+            Chào mừng bạn đến với hệ thống mô phỏng, nơi bạn có thể thử nghiệm và khám phá các
+            mô phỏng CPU, bộ nhớ cache, bộ nhớ chính và bộ nhớ ảo.
+        </p>
+    </header>
+    <!-- Button to open modal -->
+    <button onclick="document.getElementById('aboutModal').style.display='block'">Giới thiệu</button>
+
+    <!-- Modal container -->
+    <div id="aboutModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="document.getElementById('aboutModal').style.display='none'">&times;</span>
+            <h2>Giới thiệu ứng dụng</h2>
+            <ul>
+                <strong>Tên ứng dụng:</strong> Mô phỏng Thực hành Kiến trúc Máy Tính
+                <br>
+                <strong>Tác giả:</strong> Đoàn Hòa Minh, Ngô Viết Thịnh, Võ Văn Phúc, Trương Hùng Chen, Nguyễn Văn Linh
+                <br>
+                <strong>Năm phát hành:</strong> 2025
+                <br>
+                <strong>Mục tiêu:</strong> Hỗ trợ sinh viên ngành Kỹ thuật Máy tính và Điện - Điện tử học tập Kiến trúc Máy tính thông qua mô phỏng trực quan.
+                <br>
+                Mọi quyền được bảo lưu. Phiên bản thử nghiệm cho mục đích học tập và nghiên cứu.
+                <br>
+                Nghiên cứu khoa học cấp cơ sở Đại học Nam Cần thơ 2025.
+                <br>
+            </ul>
+
+            <h2>Các công cụ mã nguồn mở được sử dụng</h2>
+            <ul>
+                <li>
+                    <a href="https://circuitverse.org/simulator/" target="_blank">CircuitVerse</a> – Trình mô phỏng thiết kế mạch số trực tuyến<br>
+                    <strong>Nguồn:</strong> <a href="https://github.com/CircuitVerse/CircuitVerse" target="_blank">CircuitVerse trên GitHub</a><br>
+                    <strong>Giấy phép:</strong> MIT License<br>
+                    <strong>Tác giả:</strong> Dự án cộng đồng giáo dục
+                </li>
+
+                <li>
+                    <a href="https://aleksa-sukovic.github.io/mips-visualiser/" target="_blank">MIPS Visualizer</a> – Trình mô phỏng hợp ngữ MIPS trực tuyến<br>
+                    <strong>Nguồn:</strong> <a href="https://github.com/aleksa-sukovic/mips-visualiser" target="_blank">aleksa-sukovic/mips-visualiser trên GitHub</a><br>
+                    <strong>Giấy phép:</strong> MIT License<br>
+                    <strong>Tác giả:</strong> Aleksa Sukovic
+                </li>
+
+                <li>
+                    <a href="https://godbolt.org/" target="_blank">Compiler Explorer</a> – Biên dịch trình C qua hợp ngữ MIPS trực tuyến<br>
+                    <strong>Nguồn:</strong> <a href="https://github.com/compiler-explorer/compiler-explorer" target="_blank">compiler-explorer trên GitHub</a><br>
+                    <strong>Giấy phép:</strong> BSD-2-Clause License<br>
+                    <strong>Tác giả:</strong> Matt Godbolt và cộng đồng Compiler Explorer
+                </li>
+
+                <li>
+                    <a href="https://personal.ntu.edu.sg/smitha/ParaCache/Paracache" target="_blank">ParaCache</a> – Trình mô phỏng bộ nhớ máy tính trực tuyến<br>
+                    <strong>Nguồn:</strong> <a href="https://www3.ntu.edu.sg/home/smitha/ParaCache/Paracache/start.html" target="_blank">ParaCache tại NTU</a><br>
+                    <strong>Tài liệu học thuật:</strong> <a href="https://www.researchgate.net/publication/319052438_PARACACHE_Educational_Simulator_for_Cache_and_Virtual_Memory" target="_blank">PARACACHE: Educational Simulator for Cache and Virtual Memory</a><br>
+                    <strong>Tác giả:</strong> Smitha K. Gopi và Aryani Paramita
+                </li>
+            </ul>
+            <p>Ứng dụng tuân thủ các giấy phép mã nguồn mở và cam kết tôn trọng cộng đồng phát triển phần mềm.</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Thiết kế và Mô phỏng Mạch Kiến trúc Máy tính -->
+        <div class="panel">
+            <h3>Thiết kế và Mô phỏng Mạch Kiến trúc Máy tính - CircuitVerse</h3>
+            <p>
+                Trình mô phỏng CircuitVerse hỗ trợ trực quan thiết kế cấu trúc mạch logic trong của CPU MIPS.
+                Người học có thể thiết kế các thành phần như ALU, thanh ghi, bộ giải mã lệnh và bus dữ liệu
+                phối hợp xử lý lệnh theo từng chu kỳ, từ đó hiểu rõ quy trình tìm nạp, giải mã và thực thi lệnh
+                trong kiến trúc bộ xử lý.
+            </p>
+
+            <button onclick="window.location.href='Circuitverse_labs.html'">Thực hành</button>
+            <button onclick="window.location.href='Circuitverse_userguide.html'">Cách dùng</button>
+            <button onclick="window.open('https://circuitverse.org/simulator', '_blank')">Vào trình</button>
+        </div>
+
+        <div class="container">
+            <!-- Mô phỏng Trực quan Kiến trúc MIPS -->
+            <div class="panel">
+                <h3>Mô phỏng Trực quan Kiến trúc MIPS - MIPS Visualizer</h3>
+                <p>
+                    Trình mô phỏng trực quan MIPS Visualizer hỗ trợ trực quan hóa cấu trúc và hoạt động bên trong của CPU MIPS
+                    trên sơ đồ mạch logic. Người học có thể quan sát cách các thành phần như ALU, thanh ghi,
+                    bộ giải mã lệnh và bus dữ liệu phối hợp xử lý lệnh theo từng chu kỳ, từ đó hiểu rõ quy trình
+                    tìm nạp, giải mã và thực thi lệnh trong kiến trúc bộ xử lý.
+                </p>
+
+                <button onclick="window.location.href='Visualizer_labs.html'">Thực hành</button>
+                <button onclick="window.location.href='Visualizer_userguide.html'">Cách dùng</button>
+                <button onclick="window.open('https://aleksa-sukovic.github.io/mips-visualiser', '_blank')">Vào trình</button>
+            </div>
+
+            <!-- Biên dịch Trình C qua Hợp ngữ MIPS -->
+            <div class="panel">
+                <h3>Biên dịch Trình C qua Hợp ngữ MIPS - Compiler Explorer</h3>
+                <p>
+                    Trình biên dịch Compiler Explorer hổ trợ biên dịch trình C qua hợp ngữ MIPS.
+                    trên CPU MIPS một cách trực quan. Người học có thể theo dõi quá trình thực thi từng lệnh, bao gồm
+                    các bước: tìm nạp, giải mã và thực thi. Các giá trị thanh ghi và bộ nhớ được cập nhật theo thời
+                    gian thực, giúp sinh viên hiểu sâu hơn về cách hoạt động của bộ xử lý MIPS và cấu trúc chương trình
+                    Assembly ở mức phần cứng.
+                </p>
+
+                <button onclick="window.location.href='Compiler_labs.html'">Thực hành</button>
+                <button onclick="window.location.href='Compiler_userguide.html'">Cách dùng</button>
+                <button onclick="window.open('https://godbolt.org/', '_blank')">Vào trình</button>
+            </div>
+
+            <!-- Mô phỏng Hợp ngữ MIPS -->
+            <div class="panel">
+                <h3>Mô phỏng Hợp ngữ MIPS - JsSpim</h3>
+                <p>
+                    Công cụ mô phỏng trực tuyến này cho phép sinh viên viết, biên dịch và mô phỏng chương trình Assembly
+                    trên CPU MIPS một cách trực quan. Người học có thể theo dõi quá trình thực thi từng lệnh, bao gồm
+                    các bước: tìm nạp, giải mã và thực thi. Các giá trị thanh ghi và bộ nhớ được cập nhật theo thời
+                    gian thực, giúp sinh viên hiểu sâu hơn về cách hoạt động của bộ xử lý MIPS và cấu trúc chương trình
+                    Assembly ở mức phần cứng.
+                </p>
+
+                <button onclick="window.location.href='JsSpim_labs.html'">Thực hành</button>
+                <button onclick="window.location.href='JsSpim_userguide.html'">Cách dùng</button>
+                <button onclick="window.open('https://shawnzhong.github.io/JsSpim/', '_blank')">Vào trình</button>
+            </div>
+
+            <!-- Mô phỏng Bộ nhớ -->
+            <div class="panel">
+                <h3>Mô phỏng Bộ nhớ Cache, Bộ nhớ chính và Bộ nhớ ảo - ParaCache</h3>
+                <p>
+                    Mô phỏng này giúp sinh viên hình dung rõ cách hoạt động của bộ nhớ cache, bộ nhớ chính và bộ nhớ
+                    ảo thông qua giao diện tương tác. Sinh viên có thể chọn các chiến lược ánh xạ (trực tiếp, toàn
+                    phần, theo tập hợp) và thuật toán thay thế khối (LRU, FIFO, Random), quan sát cách dữ liệu được
+                    lưu trữ, truy xuất, và bị thay thế khi có cache miss. Đây là công cụ trực quan sinh động, giúp dễ
+                    dàng nắm bắt các khái niệm trừu tượng trong tổ chức bộ nhớ máy tính.
+                </p>
+
+                <button onclick="window.location.href='Paracache_labs.html'">Thực hành</button>
+                <button onclick="window.location.href='Paracache_userguide.html'">Cách dùng</button>
+                <button onclick="window.open('https://personal.ntu.edu.sg/smitha/ParaCache/Paracache/start.html', '_blank')">Vào trình</button>
+            </div>
+        </div>
+
+        <footer>
+            <p><a href="https://nctu.edu.vn" target="_blank">Trường Đại học Nam Cần Thơ</a></p>
+            <div class="core-values">
+                <span>Trí tuệ</span> •
+                <span>Sáng tạo</span> •
+                <span>Hội nhập</span> •
+                <span>Phát triển</span>
+            </div>
+
+        </footer>
+
 </body>
 </html>
