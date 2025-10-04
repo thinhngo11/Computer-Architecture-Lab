@@ -1,0 +1,49 @@
+﻿body {
+    font-family: Arial, sans-serif;
+    background-color: #FFFAE6;
+    color: #333;
+    margin: 20px;
+    line-height: 1.6;
+}
+
+h1, h2 {
+    color: #CC9900;
+}
+
+ul {
+    padding-left: 20px;
+}
+
+li {
+    margin-bottom: 5px;
+}
+
+.section {
+    margin-bottom: 30px;
+    border-top: 2px solid #FFCC00;
+    padding-top: 20px;
+}
+
+a {
+    color: #4169E1;
+    text-decoration: none;
+}
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+.back-button {
+    display: inline-block;
+    background-color: #4169E1; /* Royal Blue */
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+    .back-button:hover {
+        background-color: #27408B; /* Darker blue on hover */
+    }

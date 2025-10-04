@@ -1,0 +1,159 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Thực Hành MIPS Visualizer</title>
+    <link rel="stylesheet" href="css/labs.css">
+</head>
+<body>
+
+    <h1>🧠 Thực Hành MIPS Visualizer</h1>
+
+    <div class="section">
+        <h2>🔗 Truy cập MIPS Visualizer</h2>
+        <ul>
+            <li>Trang web: <a href="https://aleksa-sukovic.github.io/mips-visualiser/" target="_blank">MIPS Visualizer</a></li>
+            <li>Không cần đăng nhập – sử dụng trực tiếp trên trình duyệt.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>🛠️ Hướng dẫn thực hành</h2>
+        <p>Thực hiện từng lệnh MIPS sau trong MIPS Visualizer:</p>
+        <ul>
+            <li><code>add</code> – cộng hai thanh ghi</li>
+            <li><code>addi</code> – cộng với hằng số</li>
+            <li><code>slt</code> – so sánh nhỏ hơn</li>
+            <li><code>sub</code> – trừ hai thanh ghi</li>
+            <li><code>bne</code> – nhảy nếu khác</li>
+            <li><code>beq</code> – nhảy nếu bằng</li>
+            <li><code>sw</code> – lưu vào bộ nhớ</li>
+            <li><code>lw</code> – tải từ bộ nhớ</li>
+        </ul>
+        <p><strong>Yêu cầu:</strong> Quan sát và mô tả luồng điều khiển và luồng dữ liệu qua các thành phần phần cứng MIPS như PC, ALU, Register File, Memory, Control Unit.</p>
+    </div>
+
+    <div class="section">
+        <h2>📝 Bài tập trắc nghiệm</h2>
+
+        <div class="question">
+            <p>1. Lệnh <code>add</code>: Lệnh này sử dụng thành phần nào để thực hiện phép cộng?</p>
+            <ul>
+                <li>A. ALU</li>
+                <li>B. Register File</li>
+                <li>C. Memory</li>
+                <li>D. Control Unit</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            <p>2. Lệnh <code>addi</code>: Giá trị hằng được đưa vào từ đâu?</p>
+            <ul>
+                <li>A. ALU</li>
+                <li>B. Immediate Field</li>
+                <li>C. Memory</li>
+                <li>D. PC</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            <p>3. Lệnh <code>slt</code>: Kết quả của phép so sánh được lưu ở đâu?</p>
+            <ul>
+                <li>A. Memory</li>
+                <li>B. Register File</li>
+                <li>C. ALU</li>
+                <li>D. Control Unit</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            <p>4. Lệnh <code>sub</code>: Thành phần nào thực hiện phép trừ?</p>
+            <ul>
+                <li>A. ALU</li>
+                <li>B. PC</li>
+                <li>C. Memory</li>
+                <li>D. Register File</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            <p>5. Lệnh <code>bne</code>: Nếu hai thanh ghi khác nhau, điều gì xảy ra?</p>
+            <ul>
+                <li>A. PC được cập nhật theo offset</li>
+                <li>B. ALU lưu kết quả</li>
+                <li>C. Bộ nhớ được ghi</li>
+                <li>D. Không có gì xảy ra</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            <p>6. Lệnh <code>beq</code>: Điều kiện nhảy được kiểm tra bởi?</p>
+            <ul>
+                <li>A. ALU</li>
+                <li>B. Control Unit</li>
+                <li>C. Memory</li>
+                <li>D. Register File</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            <p>7. Lệnh <code>sw</code>: Dữ liệu được lưu vào đâu?</p>
+            <ul>
+                <li>A. Register File</li>
+                <li>B. Memory</li>
+                <li>C. ALU</li>
+                <li>D. PC</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            <p>8. Lệnh <code>lw</code>: Dữ liệu được tải từ đâu?</p>
+            <ul>
+                <li>A. Register File</li>
+                <li>B. ALU</li>
+                <li>C. Memory</li>
+                <li>D. Control Unit</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>🚀 Câu hỏi nâng cao</h2>
+        <p>Thực hiện các lệnh khác như <code>j</code>, <code>jal</code>, <code>jr</code> và mô tả luồng dữ liệu và điều khiển.</p>
+        <p>Bạn có thể tự phân tích hoặc làm việc với AI chatbot để xác định các thành phần phần cứng liên quan.</p>
+
+        <div class="question">
+            <p>9. Lệnh <code>j</code>: Thành phần nào quyết định địa chỉ nhảy?</p>
+            <ul>
+                <li>A. PC</li>
+                <li>B. ALU</li>
+                <li>C. Control Unit</li>
+                <li>D. Memory</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            <p>10. Lệnh <code>jal</code>: Giá trị nào được lưu vào thanh ghi $ra?</p>
+            <ul>
+                <li>A. Địa chỉ hiện tại của PC</li>
+                <li>B. Kết quả từ ALU</li>
+                <li>C. Dữ liệu từ Memory</li>
+                <li>D. Giá trị hằng</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            <p>11. Lệnh <code>jr</code>: PC được cập nhật bằng giá trị nào?</p>
+            <ul>
+                <li>A. Immediate Field</li>
+                <li>B. Giá trị trong thanh ghi</li>
+                <li>C. Kết quả từ ALU</li>
+                <li>D. Địa chỉ từ Memory</li>
+            </ul>
+        </div>
+    </div>
+    <a href="MoPhongThucHanhKTMT.html" class="back-button">← Quay lại Trang chủ</a>
+
+</body>
+</html>

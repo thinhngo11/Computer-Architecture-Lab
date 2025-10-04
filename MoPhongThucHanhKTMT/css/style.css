@@ -1,0 +1,260 @@
+/* General body styling */
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #FFF8DC; /* Light cream */
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header styling */
+header {
+    background-color: #FFD700; /* Vivid yellow */
+    color: #000;
+    padding: 20px;
+    text-align: center;
+}
+
+    header img {
+        width: 150px;
+    }
+
+    header h1 {
+        margin-top: 10px;
+        font-size: 40px; /* Adjust this value as needed */
+        font-weight: bold;
+        text-align: center;
+        letter-spacing: 1px;
+        color: #333;
+    }
+
+/* About section styling */
+about {
+    background-color: #FFFAE6; /* Soft yellow */
+    padding: 30px;
+    margin: 20px;
+    border: 2px solid #FFCC00;
+    border-radius: 10px;
+}
+
+    about h2 {
+        color: #CC9900;
+    }
+
+/* Footer styling */
+footer {
+    background-color: #FFD700;
+    color: #000;
+    font-size: 30px; /* Adjust this value as needed */
+    font-weight: bold;
+    text-align: center;
+    padding: 10px;
+}
+
+/* Link styling */
+a {
+    color: #CC9900;
+    text-decoration: none;
+}
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+.core-values {
+    margin-top: 10px;
+    font-size: 30px; /* Adjust this value as needed */
+    font-weight: bold;
+    color: #CC9900; /* Golden yellow tone */
+    text-align: center;
+    letter-spacing: 1px;
+}
+/* Modal background */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4); /* Dimmed background */
+}
+
+/* Modal content box */
+.modal-content {
+    background-color: #FFFAE6;
+    margin: 10% auto;
+    padding: 20px;
+    border: 2px solid #FFCC00;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 10px;
+    color: #333;
+}
+
+/* Close button */
+.close {
+    color: #CC9900;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+    .close:hover {
+        color: #000;
+    }
+
+/* Button styling */
+button {
+    background-color: #4169E1; /* Royal Blue */
+    color: #FFFFFF;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+    button:hover {
+        background-color: #27408B; /* Darker blue on hover */
+    }
+.back-button {
+    display: inline-block;
+    background-color: #4169E1; /* Royal Blue */
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+    .back-button:hover {
+        background-color: #27408B; /* Darker blue on hover */
+    }
+    /*
+button {
+    background-color: #FFD700;
+    color: #000;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+    button:hover {
+        background-color: #FFCC00;
+    }
+    */
+/*
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f9;
+}
+
+header {
+  background-color: #333;
+  color: white;
+  padding: 20px 0;
+  text-align: center;
+}
+
+.intro {
+  text-align: center;
+  line-height: normal;
+}
+
+p {
+  text-align: justify;
+  line-height: 1.8;
+}
+
+header h1 {
+  margin: 0;
+}
+
+.container {
+  padding: 20px;
+}
+
+.panel {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 20px 0;
+  padding: 10px;
+}
+
+.panel h3 {
+  margin-top: 0;
+  color: #333;
+}
+
+iframe {
+  width: 100%;
+  height: 500px;
+  border: none;
+  border-radius: 8px;
+}
+
+.panel button {
+  display: block;
+  margin: 20px auto 0 auto;
+  padding: 12px 28px;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: #333; Màu đen hiện đại 
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+.panel button:hover {
+  background-color: #333333;  Màu xám đen nhẹ khi hover 
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+}
+
+ Footer
+.site-footer {
+  background-color: #222;
+  color: white;
+  padding: 15px 15px;
+  margin-top: 10px;
+}
+
+.site-footer h2 {
+  margin-bottom: 10px;
+  font-size: 22px;
+}
+
+.site-footer p {
+  margin: 6px 0;
+  text-align: center;
+  line-height: 1.6;
+}
+
+.site-footer .copyright {
+  margin-top: 20px;
+  font-size: 14px;
+  color: #ccc;
+}
+
+
+
+@media screen and (max-width: 768px) {
+  iframe {
+      height: 300px; Reduce iframe height on smaller screens 
+  }
+}
+*/
