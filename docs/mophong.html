@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hệ thống Mô phỏng Kiến trúc Máy tính</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Hệ thống Mô phỏng thực hành Kiến trúc Máy tính</h1>
+        <p class="intro">Chào mừng bạn đến với hệ thống mô phỏng, nơi bạn có thể thử nghiệm và khám phá các 
+            mô phỏng CPU, bộ nhớ cache, bộ nhớ chính và bộ nhớ ảo.</p>
+    </header>
+
+    <div class="container">
+        <!-- Mô phỏng CPU MIPS (CircuitVerse) -->
+        <div class="panel">
+            <h3>Mô phỏng CPU MIPS</h3>
+            <p>Trình mô phỏng này hỗ trợ trực quan hóa cấu trúc và hoạt động bên trong của CPU MIPS thông qua 
+                sơ đồ mạch logic. Người học có thể quan sát cách các thành phần như ALU, thanh ghi, bộ giải mã 
+                lệnh và bus dữ liệu phối hợp xử lý lệnh theo từng chu kỳ, từ đó hiểu rõ quy trình tìm nạp, giải 
+                mã và thực thi lệnh trong kiến trúc vi xử lý.</p>
+
+            <button onclick="window.location.href='mota_cpu.html'">Nội dung các bài thực hành</button>
+            <button onclick="window.open('https://circuitverse.org/simulator', '_blank')">Vào trình mô phỏng</button>
+        </div>
+  
+        <!-- MIPS Assembler & Simulator -->
+        <div class="panel">
+            <h3>MIPS Assembler & Simulator</h3>
+            <p>Công cụ mô phỏng trực tuyến này cho phép sinh viên viết, biên dịch và mô phỏng chương trình Assembly
+                trên CPU MIPS một cách trực quan. Người học có thể theo dõi quá trình thực thi từng lệnh, bao gồm 
+                các bước: tìm nạp, giải mã và thực thi. Các giá trị thanh ghi và bộ nhớ được cập nhật theo thời 
+                gian thực, giúp sinh viên hiểu sâu hơn về cách hoạt động của bộ xử lý MIPS và cấu trúc chương trình
+                Assembly ở mức phần cứng.</p>
+
+            <button onclick="window.location.href='mota_mips.html'">Nội dung các bài thực hành</button>
+            <button onclick="window.open('https://www.csfieldguide.org.nz/en/interactives/mips-assembler/', '_blank')">Vào trình mô phỏng</button>
+        </div>
+  
+        <!-- Mô phỏng Bộ nhớ -->
+        <div class="panel">
+            <h3>Mô phỏng Bộ nhớ Cache, Bộ nhớ chính và Bộ nhớ ảo</h3>
+            <p>Mô phỏng này giúp sinh viên hình dung rõ cách hoạt động của bộ nhớ cache, bộ nhớ chính và bộ nhớ 
+                ảo thông qua giao diện tương tác. Sinh viên có thể chọn các chiến lược ánh xạ (trực tiếp, toàn 
+                phần, theo tập hợp) và thuật toán thay thế khối (LRU, FIFO, Random), quan sát cách dữ liệu được 
+                lưu trữ, truy xuất, và bị thay thế khi có cache miss. Đây là công cụ trực quan sinh động, giúp dễ 
+                dàng nắm bắt các khái niệm trừu tượng trong tổ chức bộ nhớ máy tính.</p>
+
+            <button onclick="window.location.href='mota_bonho'">Nội dung các bài thực hành</button>
+            <button onclick="window.open('https://personal.ntu.edu.sg/smitha/ParaCache/Paracache/start.html', '_blank')">Vào trình mô phỏng</button>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <p>Khóa luận tốt nghiệp của sinh viên <strong>Trần Ngọc Nguyên</strong> – Trường Đại học Nam Cần Thơ</p>
+        <p>Giảng viên hướng dẫn: <strong>ThS. GVC. Đoàn Hòa Minh</strong></p>
+        <p class="copyright">&copy; 2025 - Mọi quyền được bảo lưu. Phiên bản thử nghiệm cho mục đích học tập và nghiên cứu.</p>
+    </footer>
+    
+</body>
+</html>

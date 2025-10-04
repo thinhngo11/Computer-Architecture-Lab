@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài Thực Hành - Mô Phỏng CPU</title>
+    <link rel="stylesheet" href="css/labs.css">
+</head>
+<body>
+
+  <div class="container">
+    <h1>Nội dung các bài thực hành</h1>
+    <p>
+      Các bài thực hành sau đây giúp sinh viên hiểu rõ về cấu trúc và hoạt động của CPU thông qua các mô phỏng 
+      trực quan trên nền tảng web. Trình mô phỏng CircuitVerse cho phép sinh viên khám phá các thành phần trong 
+      CPU MIPS, như bộ điều khiển, ALU, bộ thanh ghi, bộ nhớ và bus dữ liệu, thông qua sơ đồ mạch logic, từ đó 
+      nắm vững cách các thành phần này phối hợp và dữ liệu di chuyển trong quá trình thực thi.
+    </p>
+
+    <h3>Các bài thực hành Kiến trúc máy tính</h3>
+    <ol>
+      <li>
+        <strong>Bài 1: Thiết kế và Mô phỏng đường đi dữ liệu (Datapath) trong CPU với ALU 1-bit</strong>
+        <div class="image-container">
+          <img src="images/cpu1.jpg" class="responsive-img1">
+          <div class="note1">
+            <strong>Chú thích:</strong>
+            <ul>
+              <li><strong>Ao, Bo</strong> → Toán hạng 1, Toán hạng 2</li>
+              <li><strong>Full Adder</strong> → Bộ cộng toàn phần</li>
+              <li><strong>Multiplexer 4:1</strong> → Bộ đa hợp dữ liệu 4:1</li>
+              <li><strong>Mạch logic</strong> → Các phép toán AND, OR, XOR</li>
+              <li><strong>Cin, Cout</strong> → Bit nhớ vào, Bit nhớ ra</li>
+              <li><strong>Fo</strong> → Ngõ ra kết quả</li>
+              <li><strong>Mo, M1</strong> → Tín hiệu chọn kênh</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="note-box">
+          <h4>Hoạt động của mô hình ALU 1-bit trong thiết kế đường đi dữ liệu của CPU</h4>
+          <ul>
+            <li>A0 = 1, B0 = 1: hai toán hạng đầu vào.</li>
+            <li>Cin = 0: bit nhớ đầu vào (Carry-in).</li>
+            <li>M0 = 0, M1 = 0: tín hiệu điều khiển chọn chức năng tại MUX (bộ chọn đầu ra).</li>
+          </ul>
+
+          <h4>Tiến trình hoạt động</h4>
+          <ul>
+            <li><strong>Bước 1:</strong> Thực hiện phép toán</li>
+            <li>&nbsp;&nbsp;&nbsp;&nbsp;Với M0 = 0, M1 = 0, MUX chọn đầu vào tương ứng với phép cộng.</li>
+            <li>&nbsp;&nbsp;&nbsp;&nbsp;ALU thực hiện phép tính: A0 + B0 + Cin = 1 + 1 + 0 = 10 (nhị phân).</li>
+            
+            <li><strong>Bước 2:</strong> Xuất kết quả</li>
+            <li>&nbsp;&nbsp;&nbsp;&nbsp;Fo = 0: bit kết quả (bit thấp).</li>
+            <li>&nbsp;&nbsp;&nbsp;&nbsp;Cout = 1: bit nhớ ra (bit cao) – do phép cộng tạo ra kết quả lớn hơn 1 bit.</li>
+          </ul>
+
+          <h4>Kết quả đầu ra</h4>
+          <ul>
+            <li>Fo = 0: là kết quả phép toán logic hoặc số học tại đầu ra chính của ALU.</li>
+            <li>Cout = 1: là bit nhớ (Carry-out) được chuyển tiếp khi mở rộng ALU lên nhiều bit.</li>
+          </ul>
+
+          <h4>Nhận xét</h4>
+          <ul>
+            <li>Mô hình là phần cơ bản của khối Execution Unit (EU) trong CPU, thể hiện hoạt động của một ALU 
+              1-bit thực hiện phép toán logic và số học.</li>
+            <li>MUX giúp lựa chọn đầu ra theo điều khiển M0-M1, minh họa vai trò quyết định của bộ điều khiển 
+              trong CPU.</li>
+            <li>Cout thể hiện chức năng quan trọng của bit nhớ khi kết hợp nhiều ALU 1-bit thành ALU 4, 8 hoặc 16 
+              bit, cho phép xử lý các phép cộng/phép toán phức tạp hơn.</li>
+            <li>Đây là bước nền tảng để sinh viên hiểu sâu hơn về cách ALU xử lý từng bit dữ liệu, và là mô hình 
+              tối giản để tiếp cận thiết kế datapath của CPU RISC.</li>
+          </ul>
+        </div>
+      </li>
+
+      <li>
+        <strong>Bài 2: Mô phỏng Bộ Thanh Ghi trong Đường đi Dữ liệu (Datapath) của CPU</strong>
+        <div class="image-container">
+          <img src="images/cpu2.jpg" class="responsive-img2">
+          <div class="note2">
+            <strong>Chú thích:</strong>
+            <ul>
+              <li><strong>W-data</strong> → Dữ liệu ghi</li>
+              <li><strong>RA-data</strong> → Dữ liệu đầu ra A</li>
+              <li><strong>RB-data</strong> → Dữ liệu đầu ra B</li>
+              <li><strong>Ra, Rb, Rc, Rd</strong> → Thanh ghi dữ liệu a, b, c, d</li>
+              <li><strong>xx</strong> → Địa chỉ ghi</li>
+              <li><strong>yy</strong> → Địa chỉ đọc A</li>
+              <li><strong>zz</strong> → Địa chỉ đọc B</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="note-box">
+          <h4>Hoạt động ghi và đọc dữ liệu từ các thanh ghi trong một CPU đơn giản</h4>
+          <ul>
+            <li>W-data = 0001: Dữ liệu cần ghi vào thanh ghi.</li>
+            <li>xx = 1: Địa chỉ thanh ghi đích được chọn là 01 (nhị phân).</li>
+            <li>Ra = 01 → Thanh ghi nguồn A.</li>
+            <li>Rb = 10 → Thanh ghi nguồn B.</li>
+            <li>zz = 01, yy = 01 → Chọn đúng thanh ghi cần đọc.</li>
+          </ul>
+
+          <h4>Tiến trình hoạt động</h4>
+          <ul>
+            <li><strong>Bước 1:</strong> Ghi dữ liệu</li>
+            <li>&nbsp;&nbsp;&nbsp;&nbsp;W-data = 0001 được ghi vào thanh ghi có địa chỉ 01.</li>
+            <li>&nbsp;&nbsp;&nbsp;&nbsp;Điều này thể hiện một bước trong giai đoạn lưu trữ kết quả của chu kỳ lệnh.</li>
+
+            <li><strong>Bước 2:</strong> Đọc dữ liệu</li>
+            <li>&nbsp;&nbsp;&nbsp;&nbsp;Các thanh ghi Ra = 01, Rb = 10 được chọn bởi bộ điều khiển.</li>
+            <li>&nbsp;&nbsp;&nbsp;&nbsp;Hai Multiplexer (MUX) sẽ chọn đầu ra tương ứng để đưa vào RA-data và RB-data.</li>
+          </ul>
+
+          <h4>Kết quả đầu ra</h4>
+          <ul>
+            <li>RA-data = 0001: Giá trị đúng với dữ liệu vừa ghi (đã lưu trong thanh ghi 01).</li>
+            <li>RB-data = 0000: Vì thanh ghi 10 chưa ghi dữ liệu, nên vẫn là mặc định (0).</li>
+          </ul>
+
+          <h4>Nhận xét</h4>
+          <ul>
+            <li>Mô hình thể hiện "đường đi dữ liệu" trong phần Execution Unit (ALU + Registers), thể hiện vai trò của
+              MUX trong việc lựa chọn đầu vào/ra và tín hiệu điều khiển từ bộ điều khiển (Control Unit).</li>
+            <li>Các hoạt động tương ứng với 2 giai đoạn: Thi hành lệnh (ghi dữ liệu vào thanh ghi đích) và Đọc toán 
+              hạng từ các thanh ghi để chuẩn bị thực hiện ALU.</li>
+            <li>Mô hình giúp sinh viên hiểu được quá trình ghi/đọc thanh ghi, cách vận hành dữ liệu qua 
+              MUX và bộ thanh ghi, và tầm quan trọng của tín hiệu điều khiển trong CPU. Đây là mô hình cơ bản 
+              mô phỏng phần cốt lõi của đường đi dữ liệu trong CPU RISC.</li>
+          </ul>
+        </div>
+      </li>
+    </ol>
+
+    <a href="MoPhongThucHanhKTMT.html" class="back-button">← Quay lại Trang chủ</a>
+  </div>
+
+</body>
+</html>
