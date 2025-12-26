@@ -1,142 +1,284 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bài Thực Hành - Mô Phỏng CPU</title>
-    <link rel="stylesheet" href="css/labs.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bài Thực Hành - Mô Phỏng CPU</title>
+  <link rel="stylesheet" href="css/labs.css">
 </head>
+
 <body>
 
   <div class="container">
-    <h1>Nội dung các bài thực hành</h1>
+    <h1>Bài thực hành Thiết kế và Mô phỏng Mạch Kiến trúc Máy tính - CircuitVerse</h1>
     <p>
-      Các bài thực hành sau đây giúp sinh viên hiểu rõ về cấu trúc và hoạt động của CPU thông qua các mô phỏng 
-      trực quan trên nền tảng web. Trình mô phỏng CircuitVerse cho phép sinh viên khám phá các thành phần trong 
-      CPU MIPS, như bộ điều khiển, ALU, bộ thanh ghi, bộ nhớ và bus dữ liệu, thông qua sơ đồ mạch logic, từ đó 
+      Các bài thực hành sau đây giúp sinh viên hiểu rõ về cấu trúc và hoạt động của CPU thông qua các mô phỏng
+      trực quan trên nền tảng web. Trình mô phỏng CircuitVerse cho phép sinh viên khám phá các thành phần trong
+      CPU MIPS, như bộ điều khiển, ALU, bộ thanh ghi, bộ nhớ và bus dữ liệu, thông qua sơ đồ mạch logic, từ đó
       nắm vững cách các thành phần này phối hợp và dữ liệu di chuyển trong quá trình thực thi.
     </p>
 
-    <h3>Các bài thực hành Kiến trúc máy tính</h3>
-    <ol>
-      <li>
-        <strong>Bài 1: Thiết kế và Mô phỏng đường đi dữ liệu (Datapath) trong CPU với ALU 1-bit</strong>
-        <div class="image-container">
-          <img src="images/cpu1.jpg" class="responsive-img1">
-          <div class="note1">
-            <strong>Chú thích:</strong>
-            <ul>
-              <li><strong>Ao, Bo</strong> → Toán hạng 1, Toán hạng 2</li>
-              <li><strong>Full Adder</strong> → Bộ cộng toàn phần</li>
-              <li><strong>Multiplexer 4:1</strong> → Bộ đa hợp dữ liệu 4:1</li>
-              <li><strong>Mạch logic</strong> → Các phép toán AND, OR, XOR</li>
-              <li><strong>Cin, Cout</strong> → Bit nhớ vào, Bit nhớ ra</li>
-              <li><strong>Fo</strong> → Ngõ ra kết quả</li>
-              <li><strong>Mo, M1</strong> → Tín hiệu chọn kênh</li>
-            </ul>
+
+    <h2>Bài 1-1: Mạch logic cơ bản & Bảng chân trị</h2>
+    <div class="note-box">
+      <h4>Mục tiêu</h4>
+      <ul>
+        <li>Nhận biết AND, OR, NOT, XOR, NAND, NOR, XNOR.</li>
+        <li>Tạo bảng chân trị 2 ngõ vào (4 tổ hợp).</li>
+        <li>Đo kiểm bằng LED/Probe và chụp hình.</li>
+      </ul>
+
+      <h4>Công cụ & Chuẩn bị</h4>
+      <ul>
+        <li>Tài khoản circuitverse.org; trình duyệt Chrome/Microsoft Edge/Firefox/Cốc Cốc.</li>
+        <li>Thư viện: Gates (AND/OR/NOT/XOR/…), Input/Output (Switch, LED).</li>
+      </ul>
+
+      <h4>Hướng dẫn thực hiện</h4>
+      <ul>
+        <li>1. New Project → đặt tên “CV01_Logic”.</li>
+        <li>2. Thêm 2 Switch (A,B) và 1 LED (Y).</li>
+        <li>3. Nối A,B → AND → Y. Bật lần lượt 00, 01, 10, 11; ghi kết quả.</li>
+        <li>4. Lặp lại cho OR, XOR; với NOT dùng 1 ngõ A.</li>
+        <li>5. Thêm nhãn (Text) các bảng chân trị; Save → Share → Public link.</li>
+      </ul>
+
+      <h4>Yêu cầu nộp</h4>
+      <ul>
+        <li>Ảnh mạch AND/OR/XOR/NOT.</li>
+        <li>Bảng chân trị điền đủ 4 tổ hợp cho từng cổng.</li>
+        <li>Public link dự án.</li>
+      </ul>
+
+      <h4>Câu hỏi ôn tập</h4>
+      <ul>
+        <li>1. Khác nhau OR và XOR trên bảng chân trị?</li>
+        <li>2. Tạo NAND từ AND và NOT như thế nào (biểu thức)?</li>
+      </ul>
+    </div>
+
+    <h2>Bài 1-2: Full Adder 1-bit & Bộ cộng 4-bit (Ripple Carry Adder)</h2>
+
+    <div class="note-box">
+      <h4>Mục tiêu</h4>
+      <ul>
+        <li>Thiết kế Half Adder (HA) và Full Adder (FA) 1-bit.</li>
+        <li>Ghép 4 FA thành bộ cộng 4-bit dạng Ripple Carry.</li>
+        <li>Kiểm thử hoạt động với Cin.</li>
+      </ul>
+
+      <h4>Công cụ & Chuẩn bị</h4>
+      <ul>
+        <li>Các cổng XOR / AND / OR.</li>
+        <li>Hex Display hoặc LED.</li>
+        <li>Kỹ thuật Subcircuit trong CircuitVerse.</li>
+      </ul>
+
+      <h4>Hướng dẫn thực hiện</h4>
+      <ol>
+        <li>Half Adder: Sum = A XOR B; Carry = A AND B.</li>
+        <li>Full Adder: Sum = A XOR B XOR Cin; Cout = (A & B) OR (Cin & (A XOR B)).</li>
+        <li>Tạo subcircuit “FA_1bit”, ghép 4 cái → “Adder_4bit”, nối Cout → Cin kế tiếp.</li>
+        <li>Thêm A[3:0], B[3:0] (Input 4-bit), Cin (1-bit); dùng Splitter/Combiner khi cần.</li>
+        <li>Test 1: A = 0011, B = 0101, Cin = 0 → Sum = 1000, Cout = 0.</li>
+        <li>Test 2: A = 1111, B = 0001, Cin = 1 → Sum = 0001, Cout = 1.</li>
+      </ol>
+
+      <h4>Yêu cầu nộp</h4>
+      <ul>
+        <li>Ảnh mạch HA, FA, Adder_4bit + Public link.</li>
+        <li>Bảng kết quả của 2 test.</li>
+      </ul>
+
+      <h4>Câu hỏi ôn tập</h4>
+      <ul>
+        <li>1. Vì sao có trễ truyền carry (ripple)?</li>
+        <li>2. Nêu ý tưởng Carry Lookahead.</li>
+      </ul>
+
+      <h4>Tham khảo</h4>
+      <ul>
+        <li><strong>Half Adder:</strong> Cộng hai bit A, B → tạo Sum và Carry. Không xử lý Cin.
+          <p>
+            Mạch Half Adder (Bộ cộng bán phần) là một mạch logic thực hiện phép cộng hai bit đầu vào: A và B. Bộ cộng
+            bán phần cho ra hai đầu ra gồm: Sum (Tổng) và Carry (bit nhớ). Tuy nhiên, Half Adder không xử lý được bit
+            nhớ từ phép cộng trước đó, vì vậy nó chỉ dùng trong các phép cộng đơn bit hoặc làm thành phần cơ bản để
+            xây dựng bộ cộng toàn phần (Full Adder).
+          </p>
+          <div class="image-container">
+            <img src="images/half-adder.png" class="responsive-img1">
           </div>
-        </div>
+        </li>
 
-        <div class="note-box">
-          <h4>Hoạt động của mô hình ALU 1-bit trong thiết kế đường đi dữ liệu của CPU</h4>
-          <ul>
-            <li>A0 = 1, B0 = 1: hai toán hạng đầu vào.</li>
-            <li>Cin = 0: bit nhớ đầu vào (Carry-in).</li>
-            <li>M0 = 0, M1 = 0: tín hiệu điều khiển chọn chức năng tại MUX (bộ chọn đầu ra).</li>
-          </ul>
-
-          <h4>Tiến trình hoạt động</h4>
-          <ul>
-            <li><strong>Bước 1:</strong> Thực hiện phép toán</li>
-            <li>&nbsp;&nbsp;&nbsp;&nbsp;Với M0 = 0, M1 = 0, MUX chọn đầu vào tương ứng với phép cộng.</li>
-            <li>&nbsp;&nbsp;&nbsp;&nbsp;ALU thực hiện phép tính: A0 + B0 + Cin = 1 + 1 + 0 = 10 (nhị phân).</li>
-            
-            <li><strong>Bước 2:</strong> Xuất kết quả</li>
-            <li>&nbsp;&nbsp;&nbsp;&nbsp;Fo = 0: bit kết quả (bit thấp).</li>
-            <li>&nbsp;&nbsp;&nbsp;&nbsp;Cout = 1: bit nhớ ra (bit cao) – do phép cộng tạo ra kết quả lớn hơn 1 bit.</li>
-          </ul>
-
-          <h4>Kết quả đầu ra</h4>
-          <ul>
-            <li>Fo = 0: là kết quả phép toán logic hoặc số học tại đầu ra chính của ALU.</li>
-            <li>Cout = 1: là bit nhớ (Carry-out) được chuyển tiếp khi mở rộng ALU lên nhiều bit.</li>
-          </ul>
-
-          <h4>Nhận xét</h4>
-          <ul>
-            <li>Mô hình là phần cơ bản của khối Execution Unit (EU) trong CPU, thể hiện hoạt động của một ALU 
-              1-bit thực hiện phép toán logic và số học.</li>
-            <li>MUX giúp lựa chọn đầu ra theo điều khiển M0-M1, minh họa vai trò quyết định của bộ điều khiển 
-              trong CPU.</li>
-            <li>Cout thể hiện chức năng quan trọng của bit nhớ khi kết hợp nhiều ALU 1-bit thành ALU 4, 8 hoặc 16 
-              bit, cho phép xử lý các phép cộng/phép toán phức tạp hơn.</li>
-            <li>Đây là bước nền tảng để sinh viên hiểu sâu hơn về cách ALU xử lý từng bit dữ liệu, và là mô hình 
-              tối giản để tiếp cận thiết kế datapath của CPU RISC.</li>
-          </ul>
-        </div>
-      </li>
-
-      <li>
-        <strong>Bài 2: Mô phỏng Bộ Thanh Ghi trong Đường đi Dữ liệu (Datapath) của CPU</strong>
-        <div class="image-container">
-          <img src="images/cpu2.jpg" class="responsive-img2">
-          <div class="note2">
-            <strong>Chú thích:</strong>
-            <ul>
-              <li><strong>W-data</strong> → Dữ liệu ghi</li>
-              <li><strong>RA-data</strong> → Dữ liệu đầu ra A</li>
-              <li><strong>RB-data</strong> → Dữ liệu đầu ra B</li>
-              <li><strong>Ra, Rb, Rc, Rd</strong> → Thanh ghi dữ liệu a, b, c, d</li>
-              <li><strong>xx</strong> → Địa chỉ ghi</li>
-              <li><strong>yy</strong> → Địa chỉ đọc A</li>
-              <li><strong>zz</strong> → Địa chỉ đọc B</li>
-            </ul>
+        <li><strong>Full Adder:</strong> Cộng A, B, Cin → tạo Sum và Cout để truyền sang tầng kế tiếp.
+          <p>Mạch Full Adder (Bộ cộng toàn phần) là một mạch logic thực hiện phép cộng ba bit đầu vào: A, B và
+            Carry-in (Cin) từ bộ cộng trước đó. Đầu ra của nó là Sum (Tổng) và Carry-out (Cout) để truyền sang
+            bộ cộng tiếp theo.
+            Đây là sơ đồ mạch logic cơ bản của một Full Adder:
+          </p>
+          <div class="image-container">
+            <img src="images/full-adder.png" class="responsive-img1">
           </div>
-        </div>
-
-        <div class="note-box">
-          <h4>Hoạt động ghi và đọc dữ liệu từ các thanh ghi trong một CPU đơn giản</h4>
+        </li>
+        <li><strong>Ripple Carry 4-bit:</strong> Ghép 4 FA nối tiếp; Cout của FA trước → Cin của FA sau.
+          <p>Bộ cộng Ripple Carry 4-bit được tạo bằng cách nối tiếp bốn bộ Full Adder 1-bit. Bit nhớ đầu ra
+            (Cout) của mỗi bộ Full Adder sẽ là bit nhớ đầu vào (Cin) cho bộ Full Adder tiếp theo (từ bit có
+            trọng số thấp nhất LSB đến bit có trọng số cao nhất MSB).
+          </p>
+          <div class="image-container">
+            <img src="images/ripple-carry-adder.png" class="responsive-img1">
+          </div>
+          <h4>Giải thích</h4>
+          <p>
+            Mạch cộng 4-bit Ripple Carry Adder là một mạch cộng nhị phân gồm 4 bộ cộng toàn phần (Full Adder) mắc
+            nối tiếp, mỗi bộ chịu trách nhiệm cộng một cặp bit ở cùng vị trí (X₀–X₃ và Y₀–Y₃). Các bộ cộng được
+            ghép theo chuỗi sao cho Carry-out của bộ cộng bậc thấp hơn sẽ được truyền vào Carry-in của bộ cộng
+            bậc cao hơn. Vì bit nhớ này lan truyền (“ripple”) qua từng tầng, mạch có tên là Ripple Carry.
+          </p>
+          <h4>Cấu trúc hoạt động</h4>
           <ul>
-            <li>W-data = 0001: Dữ liệu cần ghi vào thanh ghi.</li>
-            <li>xx = 1: Địa chỉ thanh ghi đích được chọn là 01 (nhị phân).</li>
-            <li>Ra = 01 → Thanh ghi nguồn A.</li>
-            <li>Rb = 10 → Thanh ghi nguồn B.</li>
-            <li>zz = 01, yy = 01 → Chọn đúng thanh ghi cần đọc.</li>
-          </ul>
+            <li>1. Vì sao có trễ truyền carry (ripple)?</li>
+            <li>2. Nêu ý tưởng Carry Lookahead.</li>
 
-          <h4>Tiến trình hoạt động</h4>
-          <ul>
-            <li><strong>Bước 1:</strong> Ghi dữ liệu</li>
-            <li>&nbsp;&nbsp;&nbsp;&nbsp;W-data = 0001 được ghi vào thanh ghi có địa chỉ 01.</li>
-            <li>&nbsp;&nbsp;&nbsp;&nbsp;Điều này thể hiện một bước trong giai đoạn lưu trữ kết quả của chu kỳ lệnh.</li>
-
-            <li><strong>Bước 2:</strong> Đọc dữ liệu</li>
-            <li>&nbsp;&nbsp;&nbsp;&nbsp;Các thanh ghi Ra = 01, Rb = 10 được chọn bởi bộ điều khiển.</li>
-            <li>&nbsp;&nbsp;&nbsp;&nbsp;Hai Multiplexer (MUX) sẽ chọn đầu ra tương ứng để đưa vào RA-data và RB-data.</li>
+            <li> FA₀ xử lý bit thấp nhất (LSB): X₀, Y₀ và Cin₀ → tạo ra S₀ và Cout₀</li>
+            <li>Cout₀ được đưa sang Cin₁ của FA₁</li>
+            <li>Quá trình tiếp tục qua FA₂ và FA₃</li>
+            <li>Bộ cộng cuối (FA₃) tạo ra S₃ và Cout₃ (bit nhớ cuối – MSB)</li>
           </ul>
+        </li>
+      </ul>
+    </div>
 
-          <h4>Kết quả đầu ra</h4>
-          <ul>
-            <li>RA-data = 0001: Giá trị đúng với dữ liệu vừa ghi (đã lưu trong thanh ghi 01).</li>
-            <li>RB-data = 0000: Vì thanh ghi 10 chưa ghi dữ liệu, nên vẫn là mặc định (0).</li>
-          </ul>
+    <h2>Bài 1-3: Thanh ghi 4-bit bằng D Flip-Flop (có Load đúng kỹ thuật)</h2>
+<div class="note-box">
+  <h4>Mục tiêu</h4>
+  <ul>
+    <li>Xây thanh ghi 4-bit với MUX 2:1 + DFF (giữ khi Load = 0).</li>
+    <li>Dùng Splitter/Combiner đúng bit-width cho bus 4-bit.</li>
+    <li>Kiểm thử hoạt động ghi và giữ dữ liệu của thanh ghi.</li>
+  </ul>
 
-          <h4>Nhận xét</h4>
-          <ul>
-            <li>Mô hình thể hiện "đường đi dữ liệu" trong phần Execution Unit (ALU + Registers), thể hiện vai trò của
-              MUX trong việc lựa chọn đầu vào/ra và tín hiệu điều khiển từ bộ điều khiển (Control Unit).</li>
-            <li>Các hoạt động tương ứng với 2 giai đoạn: Thi hành lệnh (ghi dữ liệu vào thanh ghi đích) và Đọc toán 
-              hạng từ các thanh ghi để chuẩn bị thực hiện ALU.</li>
-            <li>Mô hình giúp sinh viên hiểu được quá trình ghi/đọc thanh ghi, cách vận hành dữ liệu qua 
-              MUX và bộ thanh ghi, và tầm quan trọng của tín hiệu điều khiển trong CPU. Đây là mô hình cơ bản 
-              mô phỏng phần cốt lõi của đường đi dữ liệu trong CPU RISC.</li>
-          </ul>
-        </div>
-      </li>
-    </ol>
+  <h4>Công cụ & Chuẩn bị</h4>
+  <ul>
+    <li>Sequential: DFF, Clock.</li>
+    <li>Decoders & Plexers: MUX 2:1.</li>
+    <li>I/O: Splitter, Combiner, Hex Display.</li>
+  </ul>
+
+  <h4>Hướng dẫn thực hiện</h4>
+  <ul>
+    <li>1. Nối W-data[3:0] → Splitter (In = 4, Out = 1, FanOut = 4) → tách thành W0, W1, W2, W3.</li>
+    <li>2. Với mỗi bit i: MUX 2:1 (In0 ← Qi, In1 ← W[i], S ← Load) → DFF → Qi; tất cả DFF dùng chung một Clock (khoảng 1 Hz).</li>
+    <li>3. Nối Q0..Q3 → Combiner → Q-bus[3:0] → Hex Display để hiển thị giá trị thanh ghi.</li>
+    <li>4. Test A: Đặt W = 1010, Load = 1, nhấn một xung Clock → kiểm tra Q = 1010.</li>
+    <li>5. Test B: Đặt W = 0101, Load = 0, nhấn một xung Clock → kiểm tra Q vẫn giữ 1010.</li>
+    <li>6. Test C: Giữ W = 0101, đặt Load = 1, nhấn một xung Clock → kiểm tra Q = 0101.</li>
+  </ul>
+
+  <h4>Yêu cầu nộp</h4>
+  <ul>
+    <li>Ảnh mạch thanh ghi 4-bit hoàn chỉnh.</li>
+    <li>Ảnh kết quả của 3 test (A, B, C) thể hiện rõ W, Load, Q/Hex Display.</li>
+    <li>Public link mạch (nếu làm trên nền tảng online).</li>
+    <li>Bảng log giá trị Q qua từng bước (trước và sau mỗi xung Clock cho từng test).</li>
+  </ul>
+
+  <h4>Câu hỏi ôn tập</h4>
+  <ul>
+    <li>1. Vì sao gating bằng AND trước chân D là sai về mặt kỹ thuật thiết kế mạch tuần tự?</li>
+    <li>2. Viết biểu thức D_next cho mỗi bit khi Load = 0 và khi Load = 1 (sau đó rút gọn thành một biểu thức logic duy nhất).</li>
+  </ul>
+</div>
+
+<h2>Bài 1-4: ALU 4-bit (ADD, SUB, AND, OR) + MUX chọn chức năng</h2>
+<div class="note-box">
+
+  <h4>Mục tiêu</h4>
+  <ul>
+    <li>Xây 4 khối: ADD, SUB (A + ~B + 1), AND, OR.</li>
+    <li>Dùng MUX 4→1 (bus) theo Op[1:0].</li>
+    <li>Tạo cờ Zero và Carry.</li>
+  </ul>
+
+  <h4>Công cụ & Chuẩn bị</h4>
+  <ul>
+    <li>Adder_4bit (CV-02), MUX bus.</li>
+    <li>Các cổng logic (AND, OR, NOT).</li>
+    <li>Hex Display để quan sát kết quả.</li>
+  </ul>
+
+  <h4>Hướng dẫn</h4>
+  <ul>
+    <li>1. Dựng 4 khối chức năng: ADD; SUB = A + (~B) + 1; AND; OR.</li>
+    <li>2. Dùng MUX 4→1 (bus) để chọn kết quả theo Op = 00 / 01 / 10 / 11.</li>
+    <li>3. Zero = (Result == 0000); Carry lấy từ khối Adder.</li>
+    <li>4. Test: A = 1001, B = 0011 ở cả 4 Op; ghi lại Result, Carry, Zero.</li>
+  </ul>
+
+  <h4>Yêu cầu nộp</h4>
+  <ul>
+    <li>Ảnh mạch ALU hoàn chỉnh.</li>
+    <li>Bảng kết quả cho 4 phép toán.</li>
+    <li>Public link dự án.</li>
+  </ul>
+
+  <h4>Câu hỏi ôn tập</h4>
+  <ul>
+    <li>1. Tại sao SUB = A + ~B + 1?</li>
+    <li>2. Nếu thêm XOR, cần thay đổi gì trong MUX hoặc thiết kế?</li>
+  </ul>
+
+</div>
+
+<h2>Bài 1-5: CPU mini – Register File 4×4-bit (2R1W) + ALU + Control</h2>
+<div class="note-box">
+
+  <h4>Mục tiêu</h4>
+  <ul>
+    <li>Ghép Register File (xx chọn ghi; yy/zz chọn đọc) với ALU.</li>
+    <li>Chạy chuỗi thao tác ghi, đọc và tính toán.</li>
+    <li>Ghi log giá trị các thanh ghi theo thời gian.</li>
+  </ul>
+
+  <h4>Công cụ & Chuẩn bị</h4>
+  <ul>
+    <li>Decoder 2→4 (xx) để chọn thanh ghi ghi.</li>
+    <li>MUX 4→1 cho yy và zz để chọn 2 cổng đọc.</li>
+    <li>4 thanh ghi 4-bit (CV-03).</li>
+    <li>ALU 4-bit (CV-04).</li>
+  </ul>
+
+  <h4>Hướng dẫn thực hiện</h4>
+  <ul>
+    <li>1. Dựng Register File 4×4: W-data cấp song song; Decoder(xx) → Load_Ra..Rd; yy → MUX → RA; zz → MUX → RB.</li>
+    <li>2. Đưa RA và RB vào ALU; Result quay lại W-data; dùng xx để chọn thanh ghi đích cần ghi.</li>
+    <li>3. Chuỗi thao tác:</li>
+    <ul>
+      <li>B1) W = 0001, xx = 10 (ghi Rc), nhấn Clock → Rc = 0001.</li>
+      <li>B2) Op = ADD, yy = 10 (Rc), zz = 00 (Ra), ghi kết quả về Rd.</li>
+      <li>B3) Thử SUB / AND / OR và quan sát sự thay đổi của Ra..Rd.</li>
+    </ul>
+  </ul>
+
+  <h4>Yêu cầu nộp</h4>
+  <ul>
+    <li>Ảnh sơ đồ CPU mini.</li>
+    <li>Bảng log giá trị Ra..Rd theo thời gian (sau từng bước B1–B3).</li>
+    <li>Public link dự án.</li>
+  </ul>
+
+  <h4>Câu hỏi ôn tập</h4>
+  <ul>
+    <li>1. Nguy cơ Hazard nếu thêm pipeline?</li>
+    <li>2. Làm thế nào để mở rộng lên 8 thanh ghi và hỗ trợ 2 cổng ghi?</li>
+  </ul>
+
+</div>
 
     <a href="MoPhongThucHanhKTMT.html" class="back-button">← Quay lại Trang chủ</a>
   </div>
 
 </body>
+
 </html>

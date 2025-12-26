@@ -8,152 +8,154 @@
 </head>
 <body>
 
-    <h1>🧠 Thực Hành MIPS Visualizer</h1>
+    <h1>Bài thực hành Mô phỏng Trực quan Kiến trúc MIPS - MIPS Visualizer</h1>
+<h2>Bài 2-1: Nhập môn kiến trúc MIPS & Thanh ghi</h2>
+<div class="note-box">
 
-    <div class="section">
-        <h2>🔗 Truy cập MIPS Visualizer</h2>
-        <ul>
-            <li>Trang web: <a href="https://aleksa-sukovic.github.io/mips-visualiser/" target="_blank">MIPS Visualizer</a></li>
-            <li>Không cần đăng nhập – sử dụng trực tiếp trên trình duyệt.</li>
-        </ul>
-    </div>
+  <h4>Mục tiêu</h4>
+  <ul>
+    <li>Chạy các lệnh ADD, SUB, AND, OR, SLT.</li>
+    <li>Quan sát sự thay đổi của thanh ghi và datapath.</li>
+  </ul>
 
-    <div class="section">
-        <h2>🛠️ Hướng dẫn thực hành</h2>
-        <p>Thực hiện từng lệnh MIPS sau trong MIPS Visualizer:</p>
-        <ul>
-            <li><code>add</code> – cộng hai thanh ghi</li>
-            <li><code>addi</code> – cộng với hằng số</li>
-            <li><code>slt</code> – so sánh nhỏ hơn</li>
-            <li><code>sub</code> – trừ hai thanh ghi</li>
-            <li><code>bne</code> – nhảy nếu khác</li>
-            <li><code>beq</code> – nhảy nếu bằng</li>
-            <li><code>sw</code> – lưu vào bộ nhớ</li>
-            <li><code>lw</code> – tải từ bộ nhớ</li>
-        </ul>
-        <p><strong>Yêu cầu:</strong> Quan sát và mô tả luồng điều khiển và luồng dữ liệu qua các thành phần phần cứng MIPS như PC, ALU, Register File, Memory, Control Unit.</p>
-    </div>
+  <h4>Hướng dẫn</h4>
+  <ul>
+    <li>1. Thực thi lần lượt các lệnh:</li>
+    <ul>
+      <li>li $t1, 5</li>
+      <li>li $t2, 3</li>
+      <li>add $t3, $t1, $t2</li>
+      <li>sub $t4, $t1, $t2</li>
+      <li>and $t5, $t1, $t2</li>
+      <li>or  $t6, $t1, $t2</li>
+      <li>slt $t7, $t2, $t1</li>
+    </ul>
+    <li>2. Ghi bảng giá trị $t0..$t6 sau từng lệnh; giải thích vì sao slt cho $t7 = 1 (vì 3 &lt; 5).</li>
+  </ul>
 
-    <div class="section">
-        <h2>📝 Bài tập trắc nghiệm</h2>
+  <h4>Yêu cầu nộp</h4>
+  <ul>
+    <li>Bảng giá trị thanh ghi sau từng lệnh.</li>
+    <li>Ảnh minh họa datapath (nếu có).</li>
+  </ul>
 
-        <div class="question">
-            <p>1. Lệnh <code>add</code>: Lệnh này sử dụng thành phần nào để thực hiện phép cộng?</p>
-            <ul>
-                <li>A. ALU</li>
-                <li>B. Register File</li>
-                <li>C. Memory</li>
-                <li>D. Control Unit</li>
-            </ul>
-        </div>
+  <h4>Câu hỏi ôn tập</h4>
+  <ul>
+    <li>1. Khác biệt giữa lệnh logic và lệnh số học?</li>
+  </ul>
 
-        <div class="question">
-            <p>2. Lệnh <code>addi</code>: Giá trị hằng được đưa vào từ đâu?</p>
-            <ul>
-                <li>A. ALU</li>
-                <li>B. Immediate Field</li>
-                <li>C. Memory</li>
-                <li>D. PC</li>
-            </ul>
-        </div>
+</div>
 
-        <div class="question">
-            <p>3. Lệnh <code>slt</code>: Kết quả của phép so sánh được lưu ở đâu?</p>
-            <ul>
-                <li>A. Memory</li>
-                <li>B. Register File</li>
-                <li>C. ALU</li>
-                <li>D. Control Unit</li>
-            </ul>
-        </div>
 
-        <div class="question">
-            <p>4. Lệnh <code>sub</code>: Thành phần nào thực hiện phép trừ?</p>
-            <ul>
-                <li>A. ALU</li>
-                <li>B. PC</li>
-                <li>C. Memory</li>
-                <li>D. Register File</li>
-            </ul>
-        </div>
+<h2>Bài 2-2: Data Path – LW/SW với mảng word-aligned</h2>
+<div class="note-box">
 
-        <div class="question">
-            <p>5. Lệnh <code>bne</code>: Nếu hai thanh ghi khác nhau, điều gì xảy ra?</p>
-            <ul>
-                <li>A. PC được cập nhật theo offset</li>
-                <li>B. ALU lưu kết quả</li>
-                <li>C. Bộ nhớ được ghi</li>
-                <li>D. Không có gì xảy ra</li>
-            </ul>
-        </div>
+  <h4>Mục tiêu</h4>
+  <ul>
+    <li>Mô phỏng thao tác nạp (LW) và lưu (SW).</li>
+    <li>Theo dõi PC, IR, Register và Memory.</li>
+  </ul>
 
-        <div class="question">
-            <p>6. Lệnh <code>beq</code>: Điều kiện nhảy được kiểm tra bởi?</p>
-            <ul>
-                <li>A. ALU</li>
-                <li>B. Control Unit</li>
-                <li>C. Memory</li>
-                <li>D. Register File</li>
-            </ul>
-        </div>
+  <h4>Công cụ & Chuẩn bị</h4>
+  <ul>
+    <li>MIPS Visualizer.</li>
+    <li>Mảng 4 phần tử (word-aligned).</li>
+  </ul>
 
-        <div class="question">
-            <p>7. Lệnh <code>sw</code>: Dữ liệu được lưu vào đâu?</p>
-            <ul>
-                <li>A. Register File</li>
-                <li>B. Memory</li>
-                <li>C. ALU</li>
-                <li>D. PC</li>
-            </ul>
-        </div>
+  <h4>Hướng dẫn</h4>
+  <ul>
+    <li>1. Khai báo mảng 4 word tại địa chỉ chia hết cho 4 (word-aligned).</li>
+    <li>2. Viết vòng lặp: đọc từng phần tử bằng <code>lw</code>, cộng dồn vào $s0, sau đó <code>sw</code> $s0 về nhãn <code>sum</code>.</li>
+    <li>3. Chụp datapath tại thời điểm thực hiện LW và SW.</li>
+  </ul>
 
-        <div class="question">
-            <p>8. Lệnh <code>lw</code>: Dữ liệu được tải từ đâu?</p>
-            <ul>
-                <li>A. Register File</li>
-                <li>B. ALU</li>
-                <li>C. Memory</li>
-                <li>D. Control Unit</li>
-            </ul>
-        </div>
-    </div>
+  <h4>Yêu cầu nộp</h4>
+  <ul>
+    <li>Mã MIPS hoàn chỉnh.</li>
+    <li>Ảnh datapath tại LW và SW.</li>
+  </ul>
 
-    <div class="section">
-        <h2>🚀 Câu hỏi nâng cao</h2>
-        <p>Thực hiện các lệnh khác như <code>j</code>, <code>jal</code>, <code>jr</code> và mô tả luồng dữ liệu và điều khiển.</p>
-        <p>Bạn có thể tự phân tích hoặc làm việc với AI chatbot để xác định các thành phần phần cứng liên quan.</p>
+  <h4>Câu hỏi ôn tập</h4>
+  <ul>
+    <li>1. Vì sao cần word-aligned cho LW/SW?</li>
+  </ul>
 
-        <div class="question">
-            <p>9. Lệnh <code>j</code>: Thành phần nào quyết định địa chỉ nhảy?</p>
-            <ul>
-                <li>A. PC</li>
-                <li>B. ALU</li>
-                <li>C. Control Unit</li>
-                <li>D. Memory</li>
-            </ul>
-        </div>
+</div>
 
-        <div class="question">
-            <p>10. Lệnh <code>jal</code>: Giá trị nào được lưu vào thanh ghi $ra?</p>
-            <ul>
-                <li>A. Địa chỉ hiện tại của PC</li>
-                <li>B. Kết quả từ ALU</li>
-                <li>C. Dữ liệu từ Memory</li>
-                <li>D. Giá trị hằng</li>
-            </ul>
-        </div>
+<h2>Bài 2-3: Pipeline 5 giai đoạn & RAW Hazard</h2>
+<div class="note-box">
 
-        <div class="question">
-            <p>11. Lệnh <code>jr</code>: PC được cập nhật bằng giá trị nào?</p>
-            <ul>
-                <li>A. Immediate Field</li>
-                <li>B. Giá trị trong thanh ghi</li>
-                <li>C. Kết quả từ ALU</li>
-                <li>D. Địa chỉ từ Memory</li>
-            </ul>
-        </div>
-    </div>
-    <a href="MoPhongThucHanhKTMT.html" class="back-button">← Quay lại Trang chủ</a>
+  <h4>Mục tiêu</h4>
+  <ul>
+    <li>Quan sát 5 giai đoạn pipeline: IF / ID / EX / MEM / WB.</li>
+    <li>Phân tích RAW hazard; thử chèn NOP hoặc bật forwarding.</li>
+  </ul>
+
+  <h4>Công cụ & Chuẩn bị</h4>
+  <ul>
+    <li>MIPS Visualizer có chế độ xem pipeline.</li>
+  </ul>
+
+  <h4>Hướng dẫn</h4>
+  <ul>
+    <li>1. Dùng chuỗi lệnh gây RAW:</li>
+    <ul>
+      <li>lw $t0, 0($s0)</li>
+      <li>add $t1, $t0, $t2</li>
+      <li>sub $t3, $t1, $t0</li>
+    </ul>
+    <li>2. Quan sát pipeline timeline và đếm số chu kỳ để hoàn thành.</li>
+    <li>3. Chèn 1–2 <code>nop</code> hoặc bật forwarding (nếu công cụ hỗ trợ) rồi so sánh số chu kỳ.</li>
+  </ul>
+
+  <h4>Yêu cầu nộp</h4>
+  <ul>
+    <li>Ảnh pipeline timeline.</li>
+    <li>Bảng so sánh số chu kỳ trước và sau khi dùng NOP/forwarding.</li>
+  </ul>
+
+  <h4>Câu hỏi ôn tập</h4>
+  <ul>
+    <li>1. Forwarding xử lý RAW hazard theo cơ chế nào?</li>
+  </ul>
+
+</div>
+
+
+<h2>Bài 2-4: Nhánh & Dự đoán nhánh</h2>
+<div class="note-box">
+
+  <h4>Mục tiêu</h4>
+  <ul>
+    <li>Quan sát control hazard khi dùng BEQ, BNE, J.</li>
+    <li>Giảm branch penalty bằng cách sắp xếp lại lệnh.</li>
+  </ul>
+
+  <h4>Công cụ & Chuẩn bị</h4>
+  <ul>
+    <li>MIPS Visualizer.</li>
+  </ul>
+
+  <h4>Hướng dẫn</h4>
+  <ul>
+    <li>1. Tạo vòng lặp cộng 1 → N (N = 10) dùng <code>addi</code> và <code>beq/bne</code>.</li>
+    <li>2. Ghi lại số lần flush khi dự đoán sai (nếu công cụ hiển thị).</li>
+    <li>3. Sắp xếp lại lệnh để giảm flush và so sánh kết quả.</li>
+  </ul>
+
+  <h4>Yêu cầu nộp</h4>
+  <ul>
+    <li>Mã nguồn MIPS.</li>
+    <li>Thống kê số flush và số chu kỳ trước/sau tối ưu.</li>
+  </ul>
+
+  <h4>Câu hỏi ôn tập</h4>
+  <ul>
+    <li>1. Vì sao nhánh gây penalty? Nêu một biện pháp giảm.</li>
+  </ul>
+
+</div>
+<a href="MoPhongThucHanhKTMT.html" class="back-button">← Quay lại Trang chủ</a>
 
 </body>
 </html>

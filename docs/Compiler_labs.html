@@ -10,144 +10,172 @@
 <body>
     <div class="container">
 
-        <h1>🧠 Thực Hành Compiler Explorer: Chuyển Đổi C → MIPS</h1>
+        <h1>Bài thực hành Biên dịch Trình C qua Hợp ngữ MIPS - Compiler Explorer</h1>
 
-        <div class="section">
-            <h2>🔗 Truy cập Compiler Explorer</h2>
-            <ul>
-                <li>Trang web: <a href="https://godbolt.org" target="_blank">https://godbolt.org</a></li>
-                <li>Chọn ngôn ngữ: C</li>
-                <li>Chọn trình biên dịch: GCC hoặc Clang</li>
-                <li>Chọn kiến trúc: MIPS32</li>
-            </ul>
-        </div>
+        <h2>Bài 3.1 – Làm quen Compiler Explorer và biên dịch mã C cơ bản</h2>
+<div class="note-box">
 
-        <div class="section">
-            <h2>🛠️ Các bước thực hành</h2>
-            <ol>
-                <li>Tạo ra trình C từ đoạn mã C và nhập vào khung bên trái</li>
-                <li>Quan sát mã hợp ngữ MIPS được tạo ở khung bên phải</li>
-                <li>Phân tích luồng dữ liệu và điều khiển</li>
-                <li>Sao chép mã MIPS và chạy trên <a href="https://shawnzhong.github.io/JsSpim/" target="_blank">JsSpim</a></li>
-            </ol>
-        </div>
+  <h4>Mục tiêu</h4>
+  <ul>
+    <li>Làm quen giao diện web Compiler Explorer (https://godbolt.org).</li>
+    <li>Biên dịch đoạn mã C và quan sát Assembly tương ứng.</li>
+    <li>Hiểu sự tương quan giữa câu lệnh C và mã máy.</li>
+  </ul>
 
-        <div class="section">
-            <h2>📌 Các phần thực hành</h2>
+  <h4>Công cụ</h4>
+  <ul>
+    <li>Trình duyệt Chrome / Edge / Cốc Cốc / …</li>
+    <li>Trang web: https://godbolt.org</li>
+    <li>Ngôn ngữ: C (compiler: gcc x86-64)</li>
+  </ul>
 
-            <h3>1. Khai báo biến và toán tử cộng/trừ</h3>
-            <code>int a = 5; int b = 3; int c = a + b - 2;</code>
-            <div class="question">
-                <p>Câu hỏi: Lệnh nào trong MIPS thực hiện phép cộng?</p>
-                <ul>
-                    <li>A. addi</li>
-                    <li>B. add</li>
-                    <li>C. sub</li>
-                    <li>D. lw</li>
-                </ul>
-            </div>
+  <h4>Hướng dẫn thực hiện (Step-by-Step)</h4>
+  <ul>
+    <li>
+      1. Vào ứng dụng mô phỏng Kiến trúc máy tính:<br>
+      <a href="https://thinhngo11.github.io/Computer-Architecture-Lab/MoPhongThucHanhKTMT.html" target="_blank">
+        https://thinhngo11.github.io/Computer-Architecture-Lab/MoPhongThucHanhKTMT.html
+      </a><br>
+      Chọn “Biên dịch trình C qua hợp ngữ MIPS – Compiler Explorer”, chọn “Cách dùng” để xem hướng dẫn, sau đó chọn “Vào trình” để truy cập trang web https://godbolt.org và làm bài tập.
+    </li>
 
-            <h3>2. Cấu trúc if/else</h3>
-            <code>if (a > b) { c = a; } else { c = b; }</code>
-            <div class="question">
-                <p>Câu hỏi: Lệnh nào kiểm tra điều kiện trong MIPS?</p>
-                <ul>
-                    <li>A. beq</li>
-                    <li>B. bne</li>
-                    <li>C. slt</li>
-                    <li>D. j</li>
-                </ul>
-            </div>
+    <li>2. Ở cửa sổ bên trái: chọn ngôn ngữ C; cửa sổ bên phải sẽ hiển thị Assembly.</li>
 
-            <h3>3. Vòng lặp</h3>
-            <code>for (int i = 0; i < 5; i++) { sum += i; }</code>
-            <div class="question">
-                <p>Câu hỏi: Lệnh nào dùng để nhảy về đầu vòng lặp?</p>
-                <ul>
-                    <li>A. j</li>
-                    <li>B. beq</li>
-                    <li>C. add</li>
-                    <li>D. sw</li>
-                </ul>
-            </div>
+    <li>
+      3. Gõ đoạn mã:
+      <pre>
+int add(int a, int b) {
+    return a + b;
+}
+      </pre>
+    </li>
 
-            <h3>4. Hàm</h3>
-            <code>int square(int x) { return x * x; }</code>
-            <div class="question">
-                <p>Câu hỏi: Thanh ghi nào lưu địa chỉ trả về khi gọi hàm?</p>
-                <ul>
-                    <li>A. $t0</li>
-                    <li>B. $ra</li>
-                    <li>C. $sp</li>
-                    <li>D. $a0</li>
-                </ul>
-            </div>
+    <li>4. Chọn compiler <b>gcc 15.2</b> với mức tối ưu <b>-O0</b> → Quan sát Assembly sinh ra.</li>
 
-            <h3>5. scanf và printf</h3>
-            <code>scanf("%d", &a); printf("%d", a);</code>
-            <div class="question">
-                <p>Câu hỏi: Lệnh nào trong MIPS dùng để tương tác với I/O?</p>
-                <ul>
-                    <li>A. syscall</li>
-                    <li>B. lw</li>
-                    <li>C. sw</li>
-                    <li>D. j</li>
-                </ul>
-            </div>
-        </div>
+    <li>5. Ghi lại các lệnh Assembly chính (ví dụ: <code>mov</code>, <code>add</code>, <code>ret</code>).</li>
+  </ul>
 
-        <div class="section">
-            <h2>🧩 Ví dụ tổng hợp</h2>
-            <code>
-                int a, b, c;<br>
-                scanf("%d %d", &a, &b);<br>
-                if (a > b) { c = a - b; }<br>
-                else { c = a + b; }<br>
-                for (int i = 0; i < c; i++) { printf("%d\\n", i); }<br>
-                int result = square(c);<br>
-                printf("Result: %d\\n", result);
-            </code>
+</div>
 
-            <div class="question">
-                <p>Câu hỏi: Lệnh MIPS nào tương ứng với <code>c = a - b;</code>?</p>
-                <ul>
-                    <li>A. add</li>
-                    <li>B. sub</li>
-                    <li>C. slt</li>
-                    <li>D. syscall</li>
-                </ul>
-            </div>
+<h2>Bài 3.2 – Quan sát tác động của tối ưu (-O0 → -O3)</h2>
+<div class="note-box">
 
-            <div class="question">
-                <p>Câu hỏi: Lệnh MIPS nào tương ứng với <code>for (int i = 0; i < c; i++)</code>?</p>
-                <ul>
-                    <li>A. beq</li>
-                    <li>B. j</li>
-                    <li>C. slt + bne</li>
-                    <li>D. syscall</li>
-                </ul>
-            </div>
+  <h4>Mục tiêu</h4>
+  <ul>
+    <li>So sánh mã Assembly khi biên dịch với các mức tối ưu khác nhau.</li>
+    <li>Hiểu cách compiler loại bỏ hoặc rút gọn câu lệnh.</li>
+  </ul>
 
-            <div class="question">
-                <p>Câu hỏi: Lệnh MIPS nào tương ứng với <code>printf("Result: %d\\n", result);</code>?</p>
-                <ul>
-                    <li>A. syscall</li>
-                    <li>B. sw</li>
-                    <li>C. add</li>
-                    <li>D. jr</li>
-                </ul>
-            </div>
-        </div>
+  <h4>Hướng dẫn</h4>
+  <ul>
+    <li>1. Vào ứng dụng mô phỏng Kiến trúc máy tính và chọn “Vào trình” để mở Compiler Explorer.</li>
 
-        <div class="section">
-            <h2>📌 Ghi chú</h2>
-            <ul>
-                <li>Sao chép mã MIPS từ Compiler Explorer và chạy trên <a href="https://shawnzhong.github.io/JsSpim/" target="_blank">JsSpim</a></li>
-                <li>Quan sát luồng dữ liệu qua ALU, PC, Register File, Memory, và Control Unit</li>
-                <li>So sánh kết quả với mã C ban đầu</li>
-            </ul>
-        </div>
-        <a href="MoPhongThucHanhKTMT.html" class="back-button">← Quay lại Trang chủ</a>
+    <li>
+      2. Gõ mã:
+      <pre>
+int sum_array(int *a, int n) {
+    int sum = 0;
+    for (int i=0; i<n; i++)
+        sum += a[i];
+    return sum;
+}
+      </pre>
+    </li>
+
+    <li>3. Chạy với RISC-V (32-bit) gcc 15.2.0 → ghi số dòng Assembly.</li>
+    <li>4. Chạy với RISC-V (32-bit) gcc 14.2.0 → ghi số dòng Assembly và nhận xét sự khác nhau.</li>
+    <li>5. Quan sát các lệnh như <code>mov</code>, <code>add</code>, <code>cmp</code>, <code>jmp</code>, <code>lea</code>.</li>
+  </ul>
+
+  <h4>Câu hỏi ôn tập</h4>
+  <ul>
+    <li>1. Compiler bỏ vòng lặp trong trường hợp nào?</li>
+    <li>2. Lệnh <code>lea</code> được dùng để làm gì?</li>
+  </ul>
+<h4>Câu hỏi ôn tập</h4>
+
+  <ul>
+    <li>1. Lệnh ret trong Assembly thực hiện chức năng gì?</li>
+    <li>2. Sự khác biệt giữa -O0 và -O1 là gì?</li>
+  </ul>
+</div>
+
+
+
+<h2>Bài 3.3 – Phân tích hàm đệ quy trong Assembly</h2>
+<div class="note-box">
+
+  <h4>Mục tiêu</h4>
+  <ul>
+    <li>Hiểu cách trình biên dịch triển khai đệ quy bằng ngăn xếp (stack).</li>
+    <li>Theo dõi các lệnh gọi và trả về (<code>call</code>, <code>ret</code>).</li>
+  </ul>
+
+  <h4>Hướng dẫn</h4>
+  <ul>
+    <li>
+      1. Mã C:
+      <pre>
+int fact(int n) {
+    if (n <= 1) return 1;
+    else return n * fact(n-1);
+}
+      </pre>
+    </li>
+
+    <li>2. Quan sát Assembly → tìm lệnh <code>call fact</code>.</li>
+    <li>3. Chú ý các lệnh <code>push</code>, <code>pop</code> và sự thay đổi của stack frame.</li>
+  </ul>
+
+  <h4>Câu hỏi ôn tập</h4>
+  <ul>
+    <li>1. Vì sao mỗi lần gọi đệ quy phải lưu giá trị tạm vào stack?</li>
+    <li>2. Nếu không có lệnh <code>ret</code>, chương trình sẽ xảy ra điều gì?</li>
+  </ul>
+
+</div>
+
+
+
+<h2>Bài 3.4 – So sánh ngôn ngữ C và C++ trong mức Assembly</h2>
+<div class="note-box">
+
+  <h4>Mục tiêu</h4>
+  <ul>
+    <li>Hiểu sự khác biệt của mã biên dịch giữa C và C++.</li>
+    <li>So sánh mã trước và sau khi sử dụng lớp (class).</li>
+  </ul>
+
+  <h4>Hướng dẫn</h4>
+  <ul>
+    <li>
+      1. Mã C:
+      <pre>
+int add(int a, int b){ return a + b; }
+      </pre>
+    </li>
+
+    <li>
+      Mã C++:
+      <pre>
+class Calc {
+public:
+    int add(int a, int b){ return a + b; }
+};
+      </pre>
+    </li>
+
+    <li>2. Biên dịch cả hai → quan sát tên hàm (mangled symbol) trong C++, ví dụ: <code>_ZN4Calc3addEii</code>.</li>
+  </ul>
+
+  <h4>Câu hỏi ôn tập</h4>
+  <ul>
+    <li>1. Tại sao hàm C++ có tên “lạ” (name mangling)?</li>
+    <li>2. Liên quan giữa OOP và tên mã máy là gì?</li>
+  </ul>
+
+</div>
+<a href="MoPhongThucHanhKTMT.html" class="back-button">← Quay lại Trang chủ</a>
     </div>
 
 </body>

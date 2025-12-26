@@ -1,180 +1,522 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bài Thực Hành - Mô phỏng Bộ nhớ</title>
-    <link rel="stylesheet" href="css/mota.css">
+    <title>Bài Thực Hành Mô phỏng Bộ nhớ Cache, Bộ nhớ chính và Bộ nhớ ảo - ParaCache</title>
+    <link rel="stylesheet" href="css/labs.css">
 </head>
+
 <body>
-  <div class="container">
-    <h1>Nội dung các bài thực hành</h1>
-      <p>
-        Các bài thực hành sau đây giúp sinh viên hiểu rõ cách tổ chức và vận hành của ba cấp bộ nhớ chính trong 
-        máy tính: bộ nhớ cache, bộ nhớ chính (RAM) và bộ nhớ ảo thông qua công cụ mô phỏng trực tuyến ParaCache. 
-        Trình mô phỏng cho phép sinh viên quan sát cơ chế ánh xạ dữ liệu vào cache, so sánh các thuật toán thay 
-        thế khối (LRU, FIFO, Random), và phân tích hiện tượng cache hit/miss. Đồng thời, mô phỏng cũng minh họa 
-        rõ cách địa chỉ ảo được ánh xạ sang địa chỉ vật lý, từ đó giúp sinh viên hiểu vai trò của bộ nhớ chính và 
-        bộ nhớ ảo trong quản lý phân trang. Nhờ giao diện trực quan và dễ thao tác, sinh viên có thể tiếp cận toàn 
-        diện khái niệm bộ nhớ phân cấp mà không cần cài đặt phần mềm chuyên biệt.
-      </p>
-      
-      <h3>Các bài thực hành Kiến trúc máy tính</h3>
-    
-      <ol>
-        <li>
-          <strong>Bài 1: Mô phỏng truy cập bộ nhớ chính và bộ nhớ Cache ánh xạ trực tiếp (Direct Mapped Cache)</strong>
-          <div class="image-bonhoao">
-            <div class="note1">
-              <ul>
-                <li><strong>Cache Size</strong> → 8</li>
-                <li><strong>Memory Size</strong> → 16</li>
-                <li><strong>Offset Bits</strong> → 2</li>
-                <li><strong>Nhập lần lượt LOAD<sub>(in hex)</sub>#</strong> → 4, 3, 1</li>
-              </ul>
-            </div>
-            <img src="images/bonho.jpg" class="responsive-img3" alt="Mô phỏng bộ nhớ ảo">
-          </div>
+    <div class="container">
+        <h1>Bài thực hành Mô phỏng Bộ nhớ Cache, Bộ nhớ chính và Bộ nhớ ảo - ParaCache</h1>
 
-          <div class="note-box">
+        <h2>Bài 5.1 – Mô phỏng truy cập bộ nhớ chính và bộ nhớ Cache ánh xạ trực tiếp (Direct Mapped Cache)</h2>
+        <div class="note-box">
+
             <h4>Cấu hình ban đầu</h4>
             <ul>
-              <li>Cache Size = 8 bytes → Cache có tổng dung lượng 8 bytes</li>
-              <li>Memory Size = 16 bytes → Bộ nhớ chính có tổng dung lượng 16 bytes</li>
-              <li>Offset Bits = 2 → Mỗi block có kích thước 2<sup>2</sup> = 4 bytes</li>
-              <li>Cache có số dòng = 8 / 4 = 2 dòng</li>
-              <li>Địa chỉ bộ nhớ tổng dài 4 bit (vì 2<sup>4</sup> = 16 địa chỉ)</li>
-              <li>Tag bits = 4 - 2 (offset) - 1 (index) = 1 bit</li>
+                <li>Cache Size → <b>64 Bytes</b> (mỗi ô nhớ = 1 Byte)</li>
+                <li>Memory Size → <b>512 Bytes</b> (mỗi ô nhớ = 1 Byte)</li>
+                <li>Offset Bits → <b>3</b> (mỗi block có 2³ = 8 Bytes)</li>
+                <li>Các lệnh nhập: <b>LOAD(in hex)# → 4, A, 2C</b></li>
             </ul>
 
-            <h4>Nhập lệnh truy cập lần lượt</h4>
+            <h4>Hướng dẫn thực hiện</h4>
+            <ol>
+                <li>Chọn kiểu Cache: <b>Direct Mapped Cache</b> (trên thanh menu màu đen).</li>
+
+                <li>Chọn chiến lược ghi:
+                    <ul>
+                        <li>Cache hit → <b>Write Back</b></li>
+                        <li>Cache miss → <b>Write On Allocate</b></li>
+                    </ul>
+                </li>
+
+                <li>
+                    Nhấn <b>Reset</b> và nhập cấu hình:
+                    <ul>
+                        <li>Cache Size = 64 Bytes → tổng dung lượng cache = 64B</li>
+                        <li>Memory Size = 512 Bytes → tổng dung lượng bộ nhớ chính = 512B</li>
+                        <li>Offset Bits = 3 → mỗi block = 8 Bytes</li>
+                    </ul>
+                </li>
+
+                <li>Nhấn <b>Submit</b> để xác nhận cấu hình (Hình 6.1).</li>
+                <div class="image-container">
+                    <img src="images/hinh-6-1.png" class="responsive-img1">
+                </div>
+
+                <li>
+                    Sau khi Submit:
+                    <ul>
+                        <li><b>Instruction Breakdown</b>: địa chỉ bộ nhớ có 9 bit (log₂(512) = 9)</li>
+                        <li>Gồm:
+                            <ul>
+                                <li>3 bit OFFSET → vị trí trong block</li>
+                                <li>3 bit INDEX → chọn block trong cache</li>
+                                <li>3 bit TAG → nhận diện block</li>
+                            </ul>
+                        </li>
+                        <li><b>Memory Block</b>: có 64 block (0H → 3FH)</li>
+                        <li><b>Cache Table</b>: có 8 block (Index 0 → 7), ban đầu:
+                            <ul>
+                                <li>Valid = 0</li>
+                                <li>Tag = ?</li>
+                                <li>Data = 0</li>
+                                <li>Dirty Bit = 0</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    Nhập lệnh tại mục Instruction:
+                    <ul>
+                        <li>Nhập <b>Load(in hex)# → 4</b>, nhấn Submit.</li>
+                        <li>Thông báo: “Instruction has been converted from hex to binary and allocated to tag, index,
+                            and
+                            offset…”</li>
+                        <li>Nhấn <b>Next</b> để xem từng bước truy cập địa chỉ 4H.</li>
+                        <li>Kết quả các bước 1–6 tương ứng với Hình 6.2 → 6.7.</li>
+                        <li>→ Ghi nhận xét về quá trình nạp block từ Memory vào Cache.</li>
+
+                        <div class="image-container">
+                            <img src="images/hinh-6-2.png" class="responsive-img1">
+                        </div>
+
+                        <div class="image-container">
+                            <img src="images/hinh-6-3.png" class="responsive-img1">
+                        </div>
+
+                        <div class="image-container">
+                            <img src="images/hinh-6-4.png" class="responsive-img1">
+                        </div>
+
+                        <div class="image-container">
+                            <img src="images/hinh-6-5.png" class="responsive-img1">
+                        </div>
+
+                        <div class="image-container">
+                            <img src="images/hinh-6-6.png" class="responsive-img1">
+                        </div>
+
+                        <div class="image-container">
+                            <img src="images/hinh-6-7.png" class="responsive-img1">
+                        </div>
+
+                    </ul>
+                </li>
+
+            </ol>
+        </div>
+
+        <h2>Bài 5.2 – Fully Associative Cache (Bộ nhớ đệm hoàn toàn phối hợp)</h2>
+        <div class="note-box">
+
+            <h4>Mục tiêu</h4>
             <ul>
-              <li>LOAD<sub>(in hex)</sub># → 4</li>
-              <li>LOAD<sub>(in hex)</sub># → 3</li>
-              <li>LOAD<sub>(in hex)</sub># → 1</li>
+                <li>Thực hiện mô phỏng tương tự Bài 5.1 nhưng với kiểu cache Fully Associative.</li>
+                <li>Thử lần lượt các chiến thuật thay thế khối: <b>FIFO</b> và <b>LRU</b>.</li>
+                <li>Ghi nhận xét về sự khác nhau giữa các chiến thuật.</li>
             </ul>
 
-            <h4>Phân tích từng truy cập</h4>
+            <h4>Hướng dẫn</h4>
+            <ol>
+                <li>Chọn kiểu cache: <b>Fully Associative Cache</b>.</li>
+                <li>Giữ nguyên cấu hình Cache Size, Memory Size, Offset Bits như Bài 5.1.</li>
+                <li>Chọn chiến thuật thay thế:
+                    <ul>
+                        <li><b>FIFO</b> → thay thế block được nạp lâu nhất.</li>
+                        <li><b>LRU</b> → thay thế block ít được truy cập nhất.</li>
+                    </ul>
+                </li>
+                <li>Nhập các lệnh LOAD(in hex)# → 4, A, 2C.</li>
+                <li>Quan sát sự thay đổi của bảng Cache sau mỗi lệnh.</li>
+                <li>Ghi nhận xét về sự khác biệt giữa FIFO và LRU.</li>
+            </ol>
+
+        </div>
+
+
+
+        <h2>Bài 5.3 – 2-Way Set Associative Cache (Bộ nhớ đệm phối hợp theo tập 2 chiều)</h2>
+        <div class="note-box">
+
+            <h4>Mục tiêu</h4>
             <ul>
-              <li><strong>a. Địa chỉ ảo nhập: 0x4 (hệ 16), bằng 4 (hệ 10), nhị phân (4 bit) là 0100</strong></li>
-              <li>&nbsp;&nbsp;&nbsp;&nbsp;Tách địa chỉ thành</li>
-              <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Tag (1 bit) = 0</li>
-              <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Index (1 bit) = 1</li>
-              <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Offset (2 bit) = 00</li>
-
-              <li>&nbsp;&nbsp;&nbsp;&nbsp;Tra cứu cache dòng có index = 1</li>
-              <li>&nbsp;&nbsp;&nbsp;&nbsp;Cache lúc này trống → Cache Miss</li>
-              <li>&nbsp;&nbsp;&nbsp;&nbsp;Nạp block chứa địa chỉ từ 0x4 đến 0x7 vào dòng 1</li>
-              <li>&nbsp;&nbsp;&nbsp;&nbsp;Ghi tag = 0, valid bit = 1 cho dòng 1</li>
-              <li>&nbsp;&nbsp;&nbsp;&nbsp;Kết quả: Cache dòng 1 cập nhật, CPU đọc dữ liệu sau khi nạp</li>
-
-              <li><strong>b. Địa chỉ ảo nhập: 0x3 (hệ 16), bằng 3 (hệ 10), nhị phân (4 bit) là 0011</strong></li>
-              <li>&nbsp;&nbsp;&nbsp;&nbsp;Tách địa chỉ thành</li>
-              <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Tag (1 bit) = 0</li>
-              <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Index (1 bit) = 0</li>
-              <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Offset (2 bit) = 11</li>
-
-              <li>&nbsp;&nbsp;&nbsp;&nbsp;Tra cứu cache dòng có index = 0</li>
-              <li>&nbsp;&nbsp;&nbsp;&nbsp;Cache dòng 0 trống → Cache Miss</li>
-              <li>&nbsp;&nbsp;&nbsp;&nbsp;Nạp block chứa địa chỉ từ 0x0 đến 0x3 vào dòng 0</li>
-              <li>&nbsp;&nbsp;&nbsp;&nbsp;Ghi tag = 0, valid bit = 1 cho dòng 0</li>
-              <li>&nbsp;&nbsp;&nbsp;&nbsp;Kết quả: Cache dòng 0 cập nhật, CPU đọc dữ liệu sau khi nạp</li>
-
-              <li><strong>c. Địa chỉ ảo nhập: 0x1 (hệ 16), bằng 1 (hệ 10), nhị phân (4 bit) là 0001</strong></li>
-              <li>&nbsp;&nbsp;&nbsp;&nbsp;Tách địa chỉ thành</li>
-              <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Tag (1 bit) = 0</li>
-              <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Index (1 bit) = 0</li>
-              <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Offset (2 bit) = 01</li>
-
-              <li>&nbsp;&nbsp;&nbsp;&nbsp;Tra cứu cache dòng 0</li>
-              <li>&nbsp;&nbsp;&nbsp;&nbsp;Cache dòng 0 đã có tag = 0 và valid bit = 1 → Cache Hit</li>
-              <li>&nbsp;&nbsp;&nbsp;&nbsp;CPU truy cập dữ liệu trực tiếp từ cache mà không cần nạp lại</li>
-
-              <li></li>
+                <li>Mô phỏng tương tự Bài 5.1 nhưng với cache 2-way set associative.</li>
+                <li>Thử các chiến thuật thay thế khối: <b>FIFO</b>, <b>LRU</b>.</li>
+                <li>Ghi nhận xét về hành vi của từng chiến thuật.</li>
             </ul>
 
-            <h4>Nhận xét</h4>
+            <h4>Hướng dẫn</h4>
             <ul>
-              <li>Bài mô phỏng trên giúp sinh viên hiểu cơ chế bộ nhớ cache ánh xạ trực tiếp, cách chia địa chỉ thành 
-                Tag, Index và Offset để truy xuất dữ liệu giữa cache và bộ nhớ chính. Sinh viên dễ nhận biết Cache 
-                Miss khi dòng cache trống hoặc tag khác, buộc phải nạp block mới từ bộ nhớ chính, và Cache Hit khi 
-                dữ liệu đã có sẵn. Việc dùng block 4 bytes giúp giảm số lần truy cập bộ nhớ chính, nâng cao hiệu 
-                suất. Đồng thời, bài thể hiện nguyên lý ánh xạ trực tiếp và hạn chế xung đột cache trong thực tế.
-              </li>
-            </ul>
-          </div>
-        </li>
+                <li>Chọn kiểu cache: <b>2-Way Set Associative</b>.</li>
+                <li>Giữ nguyên cấu hình Cache Size, Memory Size, Offset Bits.</li>
+                <li>Chọn chiến thuật thay thế:
+                    <ul>
+                        <li><b>FIFO</b></li>
+                        <li><b>LRU</b></li>
+                    </ul>
+                </li>
+                <li>Nhập các lệnh LOAD(in hex)# → 4, A, 2C.</li>
+                <li>Quan sát sự thay đổi trong từng set (mỗi set có 2 block).</li>
+                <li>Ghi nhận xét về sự khác biệt giữa FIFO và LRU trong 2-way.</li>
+                </ol>
 
-        <li>
-          <strong>Bài 2: Mô phỏng bộ nhớ ảo hãy nhập địa chỉ (dạng hex, ví dụ 0x3) để quan sát dịch địa chỉ qua TLB</strong>
-          <div class="image-bonhoao">
-            <div class="note1">
-              <ul>
-                <li><strong>Physical Page Size</strong> → 2</li>
-                <li><strong>Offset Bits</strong> → 1</li>
-                <li><strong>Virtual Memory Size</strong> → 4</li>
-                <li><strong>TLB Entries</strong> → 2</li>
-                <li><strong>LOAD<sub>(in hex)</sub>#</strong> → 3</li>
-              </ul>
-            </div>
-            <img src="images/bonhoao.jpg" class="responsive-img3" alt="Mô phỏng bộ nhớ ảo">
-          </div>
+        </div>
 
-          <div class="note-box">
-            <h4>Cấu hình ban đầu</h4>
+
+
+        <h2>Bài 5.4 – 4-Way Set Associative Cache (Bộ nhớ đệm phối hợp theo tập 4 chiều)</h2>
+        <div class="note-box">
+
+            <h4>Mục tiêu</h4>
             <ul>
-              <li>Physical Page Size = 2 → mỗi trang vật lý có kích thước  2<sup>2</sup>  = 4 byte</li>
-              <li>Offset Bits = 1 → offset trong trang dùng 1 bit (2 byte/trang)</li>
-              <li>Virtual Memory Size = 4 → tổng số địa chỉ ảo là  2<sup>4</sup>  = 16 địa chỉ (từ 0 - 15)</li>
-              <li>TLB Entries = 2 → TLB chứa tối đa 2 ánh xạ</li>
+                <li>Mô phỏng tương tự Bài 5.1 nhưng với cache 4-way set associative.</li>
+                <li>Thử các chiến thuật thay thế khối: <b>FIFO</b>, <b>LRU</b>.</li>
+                <li>So sánh hành vi của 4-way với 2-way và fully associative.</li>
             </ul>
 
-            <h4>Nhập địa chỉ ảo LOAD<sub>(in hex)</sub># = 3</h4>
+            <h4>Hướng dẫn</h4>
+            <ol>
+                <li>Chọn kiểu cache: <b>4-Way Set Associative</b>.</li>
+                <li>Giữ nguyên cấu hình Cache Size, Memory Size, Offset Bits.</li>
+                <li>Chọn chiến thuật thay thế:
+                    <ul>
+                        <li><b>FIFO</b></li>
+                        <li><b>LRU</b></li>
+                    </ul>
+                </li>
+                <li>Nhập các lệnh LOAD(in hex)# → 4, A, 2C.</li>
+                <li>Quan sát sự thay đổi trong từng set (mỗi set có 4 block).</li>
+                <li>Ghi nhận xét về hiệu quả của từng chiến thuật trong 4-way.</li>
+            </ol>
+        </div>
+
+        <h2>Bài 5.5 – So sánh hiệu năng giữa các loại cache (Cache Type Analysis I)</h2>
+        <div class="note-box">
+
+            <h4>Mục tiêu</h4>
             <ul>
-              <li>Địa chỉ ảo nhập: 0x3 (hệ 16), bằng 3 (hệ 10)</li>
-              <li>Địa chỉ ảo dạng nhị phân: 0011</li>
+                <li>Làm quen công cụ <b>Cache Type Analysis</b> trong ParaCache.</li>
+                <li>So sánh hiệu năng (Hit%, Miss%) giữa các loại cache:
+                    <b>Direct-Mapped</b>, <b>Set-Associative</b>, <b>Fully Associative</b>.
+                </li>
+                <li>Phân tích nguyên nhân <b>Conflict Miss</b> và <b>Capacity Miss</b>.</li>
             </ul>
 
-            <h4>Tách địa chỉ ảo thành VPN và Offset</h4>
+            <h4>Hướng dẫn thực hiện</h4>
+            <ol>
+                <li>Mở ParaCache → chọn tab <b>Cache Type Analysis</b>.</li>
+
+                <li>Trong mục “Trace file”, chọn <b>trace_mix.trc</b>.</li>
+
+                <li>
+                    Thiết lập thông số cơ bản:
+                    <ul>
+                        <li>Total cache size = <b>8 KB</b></li>
+                        <li>Block size = <b>64 B</b></li>
+                        <li>Replacement = <b>LRU</b></li>
+                        <li>Write = <b>Write-Through</b></li>
+                    </ul>
+                </li>
+
+                <li>
+                    Trong danh sách “Cache Types”, tick chọn:
+                    <ul>
+                        <li>Direct-Mapped</li>
+                        <li>2-Way Set Associative</li>
+                        <li>4-Way Set Associative</li>
+                        <li>Fully Associative</li>
+                    </ul>
+                    Nhấn <b>Submit</b>, kết quả như Hình 6.8.
+                    <div class="image-container">
+                        <img src="images/hinh-6-8.png" class="responsive-img1">
+                    </div>
+
+                </li>
+
+                <li>
+                    Trong mục Current Instruction:
+                    <ul>
+                        <li>Chọn <b>Gen 88 Random Instruction</b>.</li>
+                        <li>Ứng dụng sinh ngẫu nhiên 88 lệnh Load/Store với địa chỉ Hex.</li>
+                        <li>Nhấn <b>Submit</b> để tải dãy lệnh. Kết quả như Hình 6.9.</li>
+                        <div class="image-container">
+                            <img src="images/hinh-6-9.png" class="responsive-img1">
+                        </div>
+
+                    </ul>
+                </li>
+
+                <li>
+                    Nhấn <b>Next Instruction</b> hoặc <b>Fast Forward</b> để chạy toàn bộ 88 lệnh.<br>
+                    Quan sát Hit%, Miss% của từng loại cache. Hình 6.10.
+                    <div class="image-container">
+                        <img src="images/hinh-6-10.png" class="responsive-img1">
+                    </div>
+
+                </li>
+
+                <li>
+                    Ghi số liệu vào bảng sau và viết nhận xét:
+                    <pre>
+Loại Cache              Hit%     Miss%     Nhận xét (3–5 dòng)
+----------------------------------------------------------------
+Direct-Mapped
+2-Way Set Associative
+4-Way Set Associative
+Fully Associative
+      </pre>
+                </li>
+
+                <li>
+                    Đổi chiến lược thay thế khối (LRU → FIFO hoặc ngược lại), chạy lại và ghi nhận xét.
+                </li>
+            </ol>
+
+            <h4>Gợi ý phân tích</h4>
             <ul>
-              <li>Offset Bits = 1 → lấy 1 bit cuối của 0011 → Offset = 1</li>
-              <li>Phần còn lại là VPN = 01 → số 1 (thập phân)</li>
+                <li>Direct-Mapped thường có nhiều <b>conflict miss</b> nhất.</li>
+                <li>Tăng số “way” → Hit% tăng dần, nhưng sau 4-way mức cải thiện nhỏ.</li>
+                <li>Fully Associative cho Hit% cao nhất nhưng phần cứng phức tạp và tốn chi phí.</li>
             </ul>
 
-            <h4>Tra cứu TLB</h4>
+            <h4>Yêu cầu nộp bài</h4>
             <ul>
-              <li>Ban đầu TLB trống → không có ánh xạ cho VPN = 1 → TLB Miss</li>
-              <li>Mô phỏng báo TLB Miss và số lượng miss tăng</li>
+                <li>Ảnh chụp cấu hình Cache Type Analysis.</li>
+                <li>Bảng kết quả và phần nhận xét.</li>
             </ul>
 
-            <h4>Tra bảng trang (Page Table)</h4>
+            <h4>Câu hỏi ôn tập</h4>
+            <ol>
+                <li>Vì sao conflict miss giảm khi tăng associativity?</li>
+                <li>Khi nào Fully Associative không mang lại lợi ích đáng kể?</li>
+            </ol>
+
+        </div>
+
+        <h2>Bài 5.6 – Phân tích ảnh hưởng kích thước block (Cache Type Analysis)</h2>
+        <div class="note-box">
+
+            <h4>Mục tiêu</h4>
             <ul>
-              <li>Trang ảo 1 có Valid = 1 → hợp lệ</li>
-              <li>PPN = 0 → ánh xạ trang ảo 1 sang trang vật lý 0</li>
-              <li>Cập nhật TLB: VPN 1 → PPN 0</li>
+                <li>Sử dụng Cache Type Analysis để đánh giá ảnh hưởng của kích thước Block (8B, 16B, 32B, 64B, 128B).
+                </li>
+                <li>Quan sát sự thay đổi Hit% và Miss% khi thay đổi Block size.</li>
             </ul>
 
-            <h4>Tính địa chỉ vật lý (Physical Address)</h4>
+            <h4>Các bước thực hiện</h4>
+            <ol>
+                <li>Mở ParaCache → chọn tab <b>Cache Type Analysis</b>.</li>
+
+                <li>
+                    Thiết lập cấu hình:
+                    <ul>
+                        <li>Replacement = <b>LRU</b></li>
+                        <li>Write = <b>Write-Back</b> (hit) và <b>Write On Allocate</b> (miss)</li>
+                        <li>Memory Size = <b>2048B</b></li>
+                        <li>Offset bit = <b>3</b> → Block size = 8B</li>
+                        <li>Cache Types:
+                            <ul>
+                                <li>Cache 1 → Direct Mapped</li>
+                                <li>Cache 2 → 2-Way Set Associative</li>
+                                <li>Cache 3 → 4-Way Set Associative</li>
+                                <li>Cache 4 → Fully Associative</li>
+                            </ul>
+                        </li>
+                        <li>Kích thước mỗi cache = <b>8 block × 8B = 64B</b></li>
+                    </ul>
+                </li>
+
+                <li>Nhấn <b>Submit</b> để xác nhận cấu hình (Hình 6.11).</li>
+                <div class="image-container">
+                    <img src="images/hinh-6-11.png" class="responsive-img1">
+                </div>
+
+                <li>
+                    Tại cửa sổ List of Instruction (Hex):
+                    <ul>
+                        <li>Nhấn <b>Gen 88 Random Instructions</b>.</li>
+                        <li>Nhấn <b>Submit</b>.</li>
+                        <li>Chạy bằng <b>Next Instruction</b> hoặc <b>Fast Forward</b>.</li>
+                        <li>Ghi lại Hit% và Miss%.</li>
+                    </ul>
+                </li>
+
+                <li>
+                    Thay đổi Block size bằng cách đổi Offset Bit:
+                    <ul>
+                        <li>Offset = 4 → Block size = 16B</li>
+                        <li>Offset = 5 → Block size = 32B</li>
+                    </ul>
+                    Lặp lại bước 3–4 và ghi kết quả.
+                </li>
+
+                <li>
+                    Ghi kết quả vào bảng sau:
+                    <pre>
+Block size   Direct(Hit%)   2-way(Hit%)   4-way(Hit%)   Fully(Hit%)   Nhận xét
+---------------------------------------------------------------------------
+8 B
+16 B
+32 B
+      </pre>
+                </li>
+
+                <li>→ Viết kết luận tổng quát vào báo cáo.</li>
+            </ol>
+
+            <h4>Nhận xét tổng quát (gợi ý)</h4>
             <ul>
-              <li>Công thức: PPN × Page Size + Offset</li>
-              <Offset>Ở đây: PPN = 0, Page Size = 2 (2<sup>1</sup> vì offset bits = 1), Offset = 1</li>
-              <li>→ Physical Address = 0 × 2 + 1 = 1</li>
+                <li>Khi locality cao, tăng Block size giúp tận dụng spatial locality → Hit% tăng.</li>
+                <li>Khi locality thấp (truy cập ngẫu nhiên), Block lớn làm giảm hiệu quả vì số line giảm.</li>
+                <li>4-way set associative thường cho hiệu năng tốt và cân bằng chi phí phần cứng.</li>
             </ul>
 
-            <h4>Nhận xét</h4>
+            <h4>Câu hỏi ôn tập</h4>
+            <ol>
+                <li>Tại sao tăng Block size không phải lúc nào cũng cải thiện hiệu năng?</li>
+                <li>Khi chương trình truy cập tuần tự, nên chọn Block size bao nhiêu là hợp lý?</li>
+                <li>Nếu giữ tổng cache cố định, tăng Block size ảnh hưởng gì đến số line và miss rate?</li>
+            </ol>
+
+        </div>
+
+        <h2>Bài 5.7 – Mô phỏng bộ nhớ ảo (Virtual Memory Simulation)</h2>
+        <div class="note-box">
+
+            <h4>Giới thiệu</h4>
             <ul>
-              <li>Bài mô phỏng này giúp sinh viên làm rõ cơ chế hoạt động của bộ nhớ ảo, nơi địa chỉ ảo do CPU phát
-                ra được chuyển thành địa chỉ vật lý thông qua bảng trang và TLB. Thông qua ví dụ cụ thể với địa chỉ
-                ảo 0x3, sinh viên có thể quan sát quá trình phân tách địa chỉ thành VPN và Offset, TLB Miss, tra 
-                bảng trang và tính địa chỉ vật lý tương ứng. Mô phỏng này giúp sinh viên hiểu vai trò của bộ nhớ ảo
-                trong việc quản lý không gian địa chỉ hiệu quả và đảm bảo tính bảo vệ trong hệ thống máy tính.</li>
+                <li>Sơ đồ nguyên lý hoạt động của bộ nhớ ảo được ParaCache sử dụng (Hình 6.12).</li>
+                <div class="image-container">
+                    <img src="images/hinh-6-12.png" class="responsive-img1">
+                </div>
+
+                <li>Địa chỉ CPU phát ra là <b>địa chỉ ảo</b>, gồm:
+                    <ul>
+                        <li><b>Page</b> – số thứ tự trang ảo (Virtual Page Number – VPN)</li>
+                        <li><b>Offset</b> – vị trí ô nhớ trong trang</li>
+                    </ul>
+                </li>
+                <li>TLB hoạt động như một cache hoàn toàn phối hợp (fully associative).</li>
+                <li>Nếu TLB không chứa trang → tra cứu Page Table → nếu không có → Page Fault → tải từ bộ nhớ thứ cấp.
+                </li>
             </ul>
-          </div>
-        </li>
 
-      </ol>
-    <a href="MoPhongThucHanhKTMT.html" class="back-button">← Quay lại Trang chủ</a>
-  </div>
+            <h4>Giải thích hoạt động</h4>
+            <ol>
+                <li>CPU gửi địa chỉ ảo → tách thành <b>Page</b> và <b>Offset</b>.</li>
+                <li>Tìm Page trong <b>TLB</b>:
+                    <ul>
+                        <li>Nếu trùng khớp → <b>TLB Hit</b> → truy cập nhanh.</li>
+                        <li>Nếu không → <b>TLB Miss</b> → tra cứu Page Table.</li>
+                    </ul>
+                </li>
+                <li>Page Table:
+                    <ul>
+                        <li>Nếu có trang → <b>Page Table Hit</b> → lấy Physical Frame Number (PFN) → cập nhật TLB.</li>
+                        <li>Nếu không → <b>Page Fault</b> → tải trang từ bộ nhớ thứ cấp.</li>
+                    </ul>
+                </li>
+            </ol>
 
-</body>
+            <h4>Các bước thực hiện</h4>
+            <ol>
+                <li>Chọn thẻ <b>Virtual Memory</b> để vào chế độ mô phỏng (Hình 6.13).</li>
+                <div class="image-container">
+                    <img src="images/hinh-6-13.png" class="responsive-img1">
+                </div>
+
+                <li>
+                    Chọn cấu hình:
+                    <ul>
+                        <li>Physical Page Size = <b>128 Byte</b> (lũy thừa của 2).</li>
+                        <li>Offset Bits = <b>2</b> → mỗi trang có 2² = 4 Byte.</li>
+                        <li>Virtual Memory Size = <b>2048 Byte</b> → địa chỉ ảo dài 11 bit.</li>
+                        <li>TLB Entries = <b>10</b>.</li>
+                        <li>Nhấn <b>Submit</b> để xác nhận cấu hình (Hình 6.14).</li>
+                 <div class="image-container">
+                    <img src="images/hinh-6-14.png" class="responsive-img1">
+                </div>
+                       
+                    </ul>
+                </li>
+
+                <li>
+                    Sau khi Submit:
+                    <ul>
+                        <li>Địa chỉ ảo 11 bit = 9 bit Page + 2 bit Offset.</li>
+                        <li>TLB có 10 dòng (0–9).</li>
+                        <li>Page Table có 512 trang (0–1FF).</li>
+                        <li>Physical Memory có 32 trang (0–1F).</li>
+                    </ul>
+                </li>
+
+                <li>
+                    Tải lệnh (Load Instruction):
+                    <ul>
+                        <li>Chỉ hỗ trợ lệnh <b>Load</b> với địa chỉ Hex.</li>
+                        <li>Nhấn <b>Gen. Random</b> để tạo 10 lệnh ngẫu nhiên.</li>
+                        <li>Nhấn <b>Submit</b> để xác nhận.</li>
+                        <li>Thông tin hiển thị:
+                            <ul>
+                                <li>Offset = 2 bits</li>
+                                <li>Instruction Length = 11 bits</li>
+                                <li>Physical Page Rows = 32</li>
+                                <li>Page Table Rows = 512</li>
+                                <li>TLB Rows = 10</li>
+                            </ul>
+                        </li>
+                        <li>Nhấn <b>Next</b> để chạy từng lệnh hoặc <b>Fast Forward</b> để chạy nhanh.</li>
+                    </ul>
+                </li>
+
+                <li>
+                    Sau khi chạy 10 lệnh đầu tiên (Hình 6.15):
+                <div class="image-container">
+                    <img src="images/hinh-6-15.png" class="responsive-img1">
+                </div>
+
+                    <ul>
+                        <li><b>Hit Rate = 0%</b></li>
+                        <li><b>Miss Rate = 100%</b></li>
+                    </ul>
+                    <b>Giải thích:</b> TLB ban đầu trống hoàn toàn → mọi truy cập đều là TLB Miss → Page Table được dùng
+                    để tra cứu → tất cả 10 lệnh đầu đều Miss.
+                </li>
+
+                <li>
+                    Tiếp tục tạo thêm 10 lệnh mới:
+                    <ul>
+                        <li>Nhấn <b>Gen. Random</b> → Submit → chạy bằng Next.</li>
+                        <li>Quan sát diễn biến:
+                            <ul>
+                                <li>Một số trang đã có trong TLB → bắt đầu xuất hiện TLB Hit.</li>
+                                <li>Các trang mới → TLB Miss → tra Page Table → cập nhật TLB.</li>
+                            </ul>
+                        </li>
+                        <li>Ghi lại Hit%, Miss% và mô tả diễn biến.</li>
+                    </ul>
+                </li>
+                </ul>
+
+                <h4>Câu hỏi yêu cầu giải thích</h4>
+                <ol>
+                    <li><b>Vì sao 10 lệnh đầu tiên có Hit Rate = 0%?</b><br>
+                        → Vì TLB trống, chưa có trang nào được lưu → mọi truy cập đều là TLB Miss.
+                    </li>
+
+                    <li><b>Diễn biến 10 lệnh tiếp theo?</b><br>
+                        → Một số địa chỉ trùng trang → TLB Hit xuất hiện; các trang mới → Miss → cập nhật TLB.
+                    </li>
+                </ol>
+
+        </div>
+
+        <body>
+
 </html>
