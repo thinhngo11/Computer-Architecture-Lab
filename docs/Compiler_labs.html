@@ -16,33 +16,33 @@
 <div class="note-box">
 
   <h4>Mục tiêu</h4>
-  <ul>
+  <ol>
     <li>Làm quen giao diện web Compiler Explorer (https://godbolt.org).</li>
     <li>Biên dịch đoạn mã C và quan sát Assembly tương ứng.</li>
     <li>Hiểu sự tương quan giữa câu lệnh C và mã máy.</li>
-  </ul>
+  </ol>
 
   <h4>Công cụ</h4>
-  <ul>
+  <ol>
     <li>Trình duyệt Chrome / Edge / Cốc Cốc / …</li>
     <li>Trang web: https://godbolt.org</li>
     <li>Ngôn ngữ: C (compiler: gcc x86-64)</li>
-  </ul>
+  </ol>
 
   <h4>Hướng dẫn thực hiện (Step-by-Step)</h4>
-  <ul>
+  <ol>
     <li>
-      1. Vào ứng dụng mô phỏng Kiến trúc máy tính:<br>
+      Vào ứng dụng mô phỏng Kiến trúc máy tính:<br>
       <a href="https://thinhngo11.github.io/Computer-Architecture-Lab/MoPhongThucHanhKTMT.html" target="_blank">
         https://thinhngo11.github.io/Computer-Architecture-Lab/MoPhongThucHanhKTMT.html
       </a><br>
       Chọn “Biên dịch trình C qua hợp ngữ MIPS – Compiler Explorer”, chọn “Cách dùng” để xem hướng dẫn, sau đó chọn “Vào trình” để truy cập trang web https://godbolt.org và làm bài tập.
     </li>
 
-    <li>2. Ở cửa sổ bên trái: chọn ngôn ngữ C; cửa sổ bên phải sẽ hiển thị Assembly.</li>
+    <li>Ở cửa sổ bên trái: chọn ngôn ngữ C; cửa sổ bên phải sẽ hiển thị Assembly.</li>
 
     <li>
-      3. Gõ đoạn mã:
+      Gõ đoạn mã:
       <pre>
 int add(int a, int b) {
     return a + b;
@@ -50,10 +50,10 @@ int add(int a, int b) {
       </pre>
     </li>
 
-    <li>4. Chọn compiler <b>gcc 15.2</b> với mức tối ưu <b>-O0</b> → Quan sát Assembly sinh ra.</li>
+    <li>Chọn compiler <b>gcc 15.2</b> với mức tối ưu <b>-O0</b> → Quan sát Assembly sinh ra.</li>
 
-    <li>5. Ghi lại các lệnh Assembly chính (ví dụ: <code>mov</code>, <code>add</code>, <code>ret</code>).</li>
-  </ul>
+    <li>Ghi lại các lệnh Assembly chính (ví dụ: <code>mov</code>, <code>add</code>, <code>ret</code>).</li>
+  </ol>
 
 </div>
 
@@ -61,17 +61,17 @@ int add(int a, int b) {
 <div class="note-box">
 
   <h4>Mục tiêu</h4>
-  <ul>
+  <ol>
     <li>So sánh mã Assembly khi biên dịch với các mức tối ưu khác nhau.</li>
     <li>Hiểu cách compiler loại bỏ hoặc rút gọn câu lệnh.</li>
-  </ul>
+  </ol>
 
   <h4>Hướng dẫn</h4>
-  <ul>
-    <li>1. Vào ứng dụng mô phỏng Kiến trúc máy tính và chọn “Vào trình” để mở Compiler Explorer.</li>
+  <ol>
+    <li>Vào ứng dụng mô phỏng Kiến trúc máy tính và chọn “Vào trình” để mở Compiler Explorer.</li>
 
     <li>
-      2. Gõ mã:
+      Gõ mã:
       <pre>
 int sum_array(int *a, int n) {
     int sum = 0;
@@ -82,22 +82,22 @@ int sum_array(int *a, int n) {
       </pre>
     </li>
 
-    <li>3. Chạy với RISC-V (32-bit) gcc 15.2.0 → ghi số dòng Assembly.</li>
-    <li>4. Chạy với RISC-V (32-bit) gcc 14.2.0 → ghi số dòng Assembly và nhận xét sự khác nhau.</li>
-    <li>5. Quan sát các lệnh như <code>mov</code>, <code>add</code>, <code>cmp</code>, <code>jmp</code>, <code>lea</code>.</li>
-  </ul>
+    <li>Chạy với RISC-V (32-bit) gcc 15.2.0 → ghi số dòng Assembly.</li>
+    <li>Chạy với RISC-V (32-bit) gcc 14.2.0 → ghi số dòng Assembly và nhận xét sự khác nhau.</li>
+    <li>Quan sát các lệnh như <code>mov</code>, <code>add</code>, <code>cmp</code>, <code>jmp</code>, <code>lea</code>.</li>
+  </ol>
 
   <h4>Câu hỏi ôn tập</h4>
-  <ul>
-    <li>1. Compiler bỏ vòng lặp trong trường hợp nào?</li>
-    <li>2. Lệnh <code>lea</code> được dùng để làm gì?</li>
-  </ul>
+  <ol>
+    <li>Compiler bỏ vòng lặp trong trường hợp nào?</li>
+    <li>Lệnh <code>lea</code> được dùng để làm gì?</li>
+  </ol>
 <h4>Câu hỏi ôn tập</h4>
 
-  <ul>
-    <li>1. Lệnh ret trong Assembly thực hiện chức năng gì?</li>
-    <li>2. Sự khác biệt giữa -O0 và -O1 là gì?</li>
-  </ul>
+  <ol>
+    <li>Lệnh ret trong Assembly thực hiện chức năng gì?</li>
+    <li>Sự khác biệt giữa -O0 và -O1 là gì?</li>
+  </ol>
 </div>
 
 
@@ -106,15 +106,15 @@ int sum_array(int *a, int n) {
 <div class="note-box">
 
   <h4>Mục tiêu</h4>
-  <ul>
+  <ol>
     <li>Hiểu cách trình biên dịch triển khai đệ quy bằng ngăn xếp (stack).</li>
     <li>Theo dõi các lệnh gọi và trả về (<code>call</code>, <code>ret</code>).</li>
-  </ul>
+  </ol>
 
   <h4>Hướng dẫn</h4>
-  <ul>
+  <ol>
     <li>
-      1. Mã C:
+      Mã C:
       <pre>
 int fact(int n) {
     if (n <= 1) return 1;
@@ -123,15 +123,15 @@ int fact(int n) {
       </pre>
     </li>
 
-    <li>2. Quan sát Assembly → tìm lệnh <code>call fact</code>.</li>
-    <li>3. Chú ý các lệnh <code>push</code>, <code>pop</code> và sự thay đổi của stack frame.</li>
-  </ul>
+    <li>Quan sát Assembly → tìm lệnh <code>call fact</code>.</li>
+    <li>Chú ý các lệnh <code>push</code>, <code>pop</code> và sự thay đổi của stack frame.</li>
+  </ol>
 
   <h4>Câu hỏi ôn tập</h4>
-  <ul>
-    <li>1. Vì sao mỗi lần gọi đệ quy phải lưu giá trị tạm vào stack?</li>
-    <li>2. Nếu không có lệnh <code>ret</code>, chương trình sẽ xảy ra điều gì?</li>
-  </ul>
+  <ol>
+    <li>Vì sao mỗi lần gọi đệ quy phải lưu giá trị tạm vào stack?</li>
+    <li>Nếu không có lệnh <code>ret</code>, chương trình sẽ xảy ra điều gì?</li>
+  </ol>
 
 </div>
 
@@ -141,15 +141,15 @@ int fact(int n) {
 <div class="note-box">
 
   <h4>Mục tiêu</h4>
-  <ul>
+  <ol>
     <li>Hiểu sự khác biệt của mã biên dịch giữa C và C++.</li>
     <li>So sánh mã trước và sau khi sử dụng lớp (class).</li>
-  </ul>
+  </ol>
 
   <h4>Hướng dẫn</h4>
-  <ul>
+  <ol>
     <li>
-      1. Mã C:
+      Mã C:
       <pre>
 int add(int a, int b){ return a + b; }
       </pre>
@@ -165,14 +165,14 @@ public:
       </pre>
     </li>
 
-    <li>2. Biên dịch cả hai → quan sát tên hàm (mangled symbol) trong C++, ví dụ: <code>_ZN4Calc3addEii</code>.</li>
-  </ul>
+    <li>Biên dịch cả hai → quan sát tên hàm (mangled symbol) trong C++, ví dụ: <code>_ZN4Calc3addEii</code>.</li>
+  </ol>
 
   <h4>Câu hỏi ôn tập</h4>
-  <ul>
-    <li>1. Tại sao hàm C++ có tên “lạ” (name mangling)?</li>
-    <li>2. Liên quan giữa OOP và tên mã máy là gì?</li>
-  </ul>
+  <ol>
+    <li>Tại sao hàm C++ có tên “lạ” (name mangling)?</li>
+    <li>Liên quan giữa OOP và tên mã máy là gì?</li>
+  </ol>
 
 </div>
 <a href="MoPhongThucHanhKTMT.html" class="back-button">← Quay lại Trang chủ</a>

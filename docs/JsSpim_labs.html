@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bài Thực Hành - Mô Phỏng MIPS Assembler & Simulator</title>
+    <title>Bài Thực Hành - Mô Phỏng MIPS Assembler & Simolator</title>
     <link rel="stylesheet" href="css/labs.css">
 </head>
 
@@ -13,8 +13,8 @@
         <h1>Bài thực hành Mô phỏng Hợp ngữ MIPS - JsSpim</h1>
         <p>
             Các bài thực hành sau đây giúp sinh viên hiểu rõ cách CPU MIPS xử lý chương trình Assembly thông qua công
-            cụ mô phỏng trực tuyến MIPS Assembler & Simulator. Công cụ Assembler hỗ trợ viết mã và chuyển đổi lệnh
-            MIPS thành mã máy 32-bit, trong khi Simulator mô phỏng quá trình thực thi chương trình ở cấp độ lệnh, bao
+            cụ mô phỏng trực tuyến MIPS Assembler & Simolator. Công cụ Assembler hỗ trợ viết mã và chuyển đổi lệnh
+            MIPS thành mã máy 32-bit, trong khi Simolator mô phỏng quá trình thực thi chương trình ở cấp độ lệnh, bao
             gồm các bước tìm nạp, giải mã và thực thi. Nhờ giao diện trực quan, sinh viên có thể quan sát sự thay đổi
             của các thanh ghi và bộ nhớ theo từng bước thực hiện, từ đó nắm bắt được nguyên lý vận hành của CPU mà
             không cần cài đặt phần mềm chuyên dụng.
@@ -24,16 +24,16 @@
         <div class="note-box">
 
             <h4>Mục tiêu</h4>
-            <ul>
+            <ol>
                 <li>Hiểu giao diện mô phỏng JsSpim.</li>
                 <li>Sử dụng các lệnh syscall để in số, in chuỗi và nhập dữ liệu từ bàn phím.</li>
-            </ul>
+            </ol>
 
             <h4>Hướng dẫn thực hiện</h4>
             <ol>
                 <li>Mở trang mô phỏng:
-                    <a href="https://spimsimulator.sourceforge.net/jsSpim.html" target="_blank">
-                        https://spimsimulator.sourceforge.net/jsSpim.html
+                    <a href="https://spimsimolator.sourceforge.net/jsSpim.html" target="_blank">
+                        https://spimsimolator.sourceforge.net/jsSpim.html
                     </a>
                 </li>
 
@@ -62,7 +62,7 @@ main:
                 </li>
 
                 <li>Nhấn Run → quan sát vùng Output (Hình 5.2).</li>
-                </ul>
+                </ol>
                 <div class="image-container">
                     <img src="images/MIPS-output.png" class="responsive-img1">
                 </div>
@@ -79,11 +79,11 @@ main:
         <div class="note-box">
 
             <h4>Mục tiêu</h4>
-            <ul>
+            <ol>
                 <li>Sử dụng các lệnh so sánh và nhảy có điều kiện: <code>beq</code>, <code>bne</code>, <code>blt</code>,
                     <code>bgt</code>.
                 </li>
-            </ul>
+            </ol>
 
             <h4>Hướng dẫn thực hiện</h4>
             <ol>
@@ -141,9 +141,9 @@ exit:
         <div class="note-box">
 
             <h4>Mục tiêu</h4>
-            <ul>
+            <ol>
                 <li>Viết vòng lặp for trong MIPS để tính tổng từ 1 → N.</li>
-            </ul>
+            </ol>
 
             <h4>Hướng dẫn</h4>
             <ol>
@@ -193,10 +193,10 @@ loop:
         <div class="note-box">
 
             <h4>Mục tiêu</h4>
-            <ul>
+            <ol>
                 <li>Duyệt mảng ký tự và in từng phần tử.</li>
                 <li>Sử dụng syscall 11 để in ký tự.</li>
-            </ul>
+            </ol>
 
             <h4>Hướng dẫn</h4>
             <ol>
@@ -232,7 +232,7 @@ exit:
             <h4>Câu hỏi ôn tập</h4>
             <ol>
                 <li>Sự khác biệt giữa <code>lb</code> và <code>lw</code>.</li>
-                <li>Tại sao xâu phải kết thúc bằng ký tự 0 (NULL)?</li>
+                <li>Tại sao xâu phải kết thúc bằng ký tự 0 (NolL)?</li>
             </ol>
 
         </div>
